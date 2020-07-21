@@ -1,4 +1,62 @@
+<?php include "db.php" ?>
+
 <?php session_start(); ?>
+
+<?php 
+    //getting the session id
+    if (isset($_SESSION['id'])) {
+        $client_id = $_SESSION['id'];
+    }
+    //getting the item id
+    if (isset($_GET['item'])) {
+        $item_id = $_GET['item'];
+        //getting all items from cart table
+    $cart_query = "SELECT * FROM cart WHERE item_id = $item_id AND client_id = $client_id";
+    $cart_search_query = mysqli_query($db,$cart_query);
+    if (!$cart_search_query) {
+        die("QUERY FAILED" . mysqli_error($db));
+    }
+    while ($row = mysqli_fetch_array($cart_search_query)) {
+        $item_title = $row['item_title'];
+        $item_image = $row['item_image'];
+        $item_price = $row['item_price'];
+        $item_quantity = $row['item_quantity'];
+    }
+    $row_count = mysqli_num_rows($cart_search_query);
+
+    if($row_count > 0){
+        $update_query = "UPDATE cart SET item_quantity = item_quantity+1 WHERE item_id = $item_id AND client_id = $client_id";
+        $update_item_query = mysqli_query($db,$update_query);
+        header('Location: cart.php');
+
+    }else{
+         //getting the item infos from products table
+        $item_query = "SELECT * FROM products WHERE product_id = $item_id";
+        $item_search_query = mysqli_query($db,$item_query);
+
+        while ($row = mysqli_fetch_array($item_search_query)) {
+            $item_title = $row['product_title'];
+            $item_image = $row['product_image'];
+            $item_price = $row['product_price'];
+            
+        }
+
+        if (!$item_search_query) {
+            die("QUERY FAILED" . mysqli_error($db));
+        }
+
+         //adding the item to cart if it doesn't already exist
+        $add_query = "INSERT INTO cart(client_id,item_id,item_title,item_image,item_price) VALUES ($client_id,$item_id,'$item_title','$item_image',$item_price)";
+        $add_to_cart_query = mysqli_query($db,$add_query);
+
+        if (!$add_to_cart_query) {
+            die("QUERY FAILED" . mysqli_error($db));
+        }
+
+        header('Location: cart.php');
+    }
+    } 
+?>
 
 
 <!DOCTYPE html>
@@ -33,6 +91,10 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
+<!-- <script>
+	var product1=document
+</script> -->
 </head>
 <body class="animsition">
 
@@ -58,55 +120,94 @@
 							<th class="column-3">Price</th>
 							<th class="column-4 p-l-70">Quantity</th>
 							<th class="column-5">Total</th>
+							
 						</tr>
+						<?php 
+                            
+                            $cart_query = "SELECT * FROM cart WHERE client_id = $client_id";
+                            $cart_search_query = mysqli_query($db,$cart_query);
+                            while ($row = mysqli_fetch_array($cart_search_query)) {
+                                
+                                $cart_id = $row['item_id'];
+                                $item_title = $row['item_title'];
+                                $item_image = $row['item_image'];
+                                $item_price = $row['item_price'];
+                                $item_quantity = $row['item_quantity'];
+                                $total = $item_price * $item_quantity;
 
+                            
+
+                            
+?>
 						<tr class="table-row">
+						
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="images/item-10.jpg" alt="IMG-PRODUCT">
+									<img src="images/<?php echo $item_image ?>" alt="<?php echo $item_title ?>">
 								</div>
 							</td>
-							<td class="column-2">Men Tshirt</td>
-							<td class="column-3">$36.00</td>
+							<td class="column-2"><?php  echo $item_title ?></td>
+							<td class="column-3">$<?php echo $item_price ?></td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
-									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-									</button>
+									<a href='cart.php?reduce=<?php echo $cart_id ?>&user=<?php echo $client_id?>' class=" color1 flex-c-m size7 bg8 eff2">										
+											<i class="fs-12 fa fa-minus" aria-hidden="true" name="reduce"></i>									
+									</a>
 
-									<input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="1">
+									<input class="size8 m-text18 t-center num-product" type="number" id="num-product1" name="num-product1" value="<?php echo $item_quantity ?>">
 
-									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-									</button>
+									<a href='cart.php?add=<?php echo $cart_id?>&user=<?php echo $client_id ?>' class=" color1 flex-c-m size7 bg8 eff2">
+										<i class="fs-12 fa fa-plus" aria-hidden="true" name="add"></i>
+									</a>
 								</div>
 							</td>
-							<td class="column-5">$36.00</td>
+							<td class="column-5">$<?php echo $total ?></td>
+							<!-- <td><a href='cart.php?remove=$cart_id&user=$client_id'>Remove</a></td> -->
 						</tr>
+					<?php
+						if (isset($_GET['remove'])) {
+                                $removed_item_id = $_GET['remove'];
 
-						<tr class="table-row">
-							<td class="column-1">
-								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="images/item-05.jpg" alt="IMG-PRODUCT">
-								</div>
-							</td>
-							<td class="column-2">Mug Adventure</td>
-							<td class="column-3">$16.00</td>
-							<td class="column-4">
-								<div class="flex-w bo5 of-hidden w-size17">
-									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-									</button>
+                                $remove_query = "DELETE FROM cart WHERE item_id = $removed_item_id AND client_id = $client_id";
+                                $removed_item_query = mysqli_query($db,$remove_query);
 
-									<input class="size8 m-text18 t-center num-product" type="number" name="num-product2" value="1">
+                                header('Location: cart.php');
+                            }
+                            if (isset($_GET['add'])) {
+                                $added_item_id = $_GET['add'];
 
-									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-									</button>
-								</div>
-							</td>
-							<td class="column-5">$16.00</td>
-						</tr>
+                                $add_item_query = "UPDATE cart SET item_quantity = item_quantity + 1 WHERE item_id = $added_item_id AND client_id = $client_id";
+                                $added_item_query = mysqli_query($db,$add_item_query);
+
+                                header('Location: cart.php');
+                            }
+
+                            if (isset($_GET['reduce'])) {
+                                $reduced_item_id = $_GET['reduce'];
+
+                                $check_query = "SELECT * FROM cart WHERE item_id = $reduced_item_id AND client_id = $client_id ";
+                                $check_quantity_query = mysqli_query($db,$check_query);
+                                $check_row = mysqli_fetch_array($check_quantity_query);
+                                $quantity = $check_row['item_quantity'];
+
+                                if ($quantity == 1 ) {
+                                    $reduce_item_query = "DELETE FROM cart WHERE item_id = $reduced_item_id AND client_id = $client_id";
+                                    $reduced_item_query = mysqli_query($db,$reduce_item_query);
+                                }else{
+                                    $reduce_item_query = "UPDATE cart SET item_quantity = item_quantity - 1 WHERE item_id = $reduced_item_id AND client_id = $client_id";
+                                    $reduced_item_query = mysqli_query($db,$reduce_item_query);
+                                }
+
+                                
+
+                                header('Location: cart.php');
+                            }
+                            
+						}
+                            
+                        ?>
+
+						
 					</table>
 				</div>
 			</div>
@@ -146,7 +247,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
+						$<?php echo $total ?>
 					</span>
 				</div>
 
@@ -198,7 +299,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
+						$<?php echo $total ?>
 					</span>
 				</div>
 

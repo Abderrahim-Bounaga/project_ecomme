@@ -6,15 +6,14 @@
             <div class="head">Browse Categories</div>
             <ul class="main-categories">
               <li class="common-filter">
-                <form action="#">
+                <form action="category_section.php"  method="post">
                   <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">Men<span> (3600)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="brand"><label for="women">Women<span> (3600)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="brand"><label for="accessories">Accessories<span> (3600)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="footwear" name="brand"><label for="footwear">Footwear<span> (3600)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="brand"><label for="bayItem">Bay item<span> (3600)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="brand"><label for="electronics">Electronics<span> (3600)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food">Food<span> (3600)</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"  ><label for="men"><a href="category.php?item_ctgry=<?php echo '1' ?>">eyes<span> (3600)</span></a></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="brand"><label for="women"><a href="category.php?item_ctgry=<?php echo '2' ?>">face<span> (3600)</span></a></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="brand"><label for="accessories"><a href="category.php?item_ctgry=<?php echo '3' ?>">Fcheeks<span> (3600)</span></a></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="brand"><label for="bayItem"><a href="category.php?item_ctgry=<?php echo '4' ?>">brows<span> (3600)</span></a></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="brand"><label for="electronics"><a href="category.php?item_ctgry=<?php echo '5' ?>">lips<span> (3600)</span></a></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food"><a href="category.php?item_ctgry=<?php echo '6' ?>">nails<span> (3600)</span></label></a></li>
                   </ul>
                 </form>
               </li>

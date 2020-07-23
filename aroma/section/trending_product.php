@@ -8,7 +8,7 @@
         <div class="row">
          
       <?php 
-                            $query = "SELECT * FROM products WHERE Trending_Product = 0";
+                            $query = "SELECT * FROM products WHERE Trending_Product = 1";
                             $load_products_query = mysqli_query($connection,$query);
 
                             if (!$load_products_query) {

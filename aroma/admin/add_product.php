@@ -10,6 +10,7 @@ if (isset($_POST['add_product'])) {
     $product_price = $_POST['product_price'];
     $product_info = $_POST['product_info'];
     $product_desc = $_POST['product_desc'];
+    $trend_product = $_POST['trend_product'];
    
     $product_img1 = $_FILES['product_img1']['name'];
    
@@ -19,7 +20,7 @@ if (isset($_POST['add_product'])) {
     move_uploaded_file($temp_name1, "../img/$product_img1");
    
 
-    $add_product = "INSERT INTO products (Sou_CategoryId,product_CategoryId,product_date,product_title,product_image,product_price,product_info,product_desc) VALUES ('$product_cat','$categories',NOW(),'$product_title','$product_img1','$product_price','$product_info','$product_desc')";
+    $add_product = "INSERT INTO products (Sou_CategoryId,Trending_Product,product_CategoryId,product_date,product_title,product_image,product_price,product_info,product_desc) VALUES ('$product_cat','$trend_product','$categories',NOW(),'$product_title','$product_img1','$product_price','$product_info','$product_desc')";
     $add_product_query = mysqli_query($db,$add_product);
 
     if($add_product_query){
@@ -66,11 +67,11 @@ if (isset($_POST['add_product'])) {
                            $get_cat = "SELECT * FROM categories";
                            $run_cat = mysqli_query($db, $get_cat);
                            while($row_cat= mysqli_fetch_array($run_cat)){
-                               $cat_id = $row_cat['product_CategoryId'];
+                               $cat_id = $row_cat['Id'];
                                $cat_title = $row_cat['Category_title'];
 
                                echo "
-                               <option value=' $cat_id' > $cat_title </option>
+                               <option value='$cat_id' > $cat_title </option>
                                
                                ";
                            }
@@ -103,6 +104,20 @@ if (isset($_POST['add_product'])) {
 
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="title">trend product</label>
+                        <!-- <input type="text" class="form-control" name="product_title"> -->
+                        <select name="trend_product" class="form-control" >
+                        
+                        <option value=0> non </option>
+                        <option value=1 >oui </option>
+                          
+                          
+
+                        </select>
+                    </div>
+
 
                    
 

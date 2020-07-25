@@ -28,7 +28,7 @@
                         
                     </ul>
                     <li>
-                            <a href="../logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="Logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                 </li>
             </ul>
@@ -49,6 +49,9 @@
                             </li> 
                             <li>
                                 <a href="archif_product.php"><i class="fa fa-fw fa-plus"></i> archif Products</a>
+                            </li>
+                            <li>
+                                <a href="categories_product.php"><i class="fa fa-fw fa-plus"></i> Catégorie</a>
                             </li>
                         </ul>
                     </li>

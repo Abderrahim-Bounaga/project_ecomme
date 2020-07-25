@@ -48,7 +48,7 @@
                                 $product_desc = $row['product_desc'];
                                 $product_info = $row['product_info'];
                                 $product_price = $row['product_price'];
-                              //  $product_date = $row['product_date'];
+                                $product_date = $row['product_date'];
 
 
                                 echo "<tr>";

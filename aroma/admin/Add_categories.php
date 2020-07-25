@@ -17,7 +17,7 @@ if (isset($_POST['add_product'])) {
     $temp_name1 = $_FILES['product_img1']['tmp_name'];
    
 
-    move_uploaded_file($temp_name1, "../img/product/$product_img1");
+    move_uploaded_file($temp_name1, "../img/$product_img1");
    
 
     $add_product = "INSERT INTO products (Sou_CategoryId,Trending_Product,product_CategoryId,product_date,product_title,product_image,product_price,product_info,product_desc) VALUES ('$product_cat','$trend_product','$categories',NOW(),'$product_title','$product_img1','$product_price','$product_info','$product_desc')";

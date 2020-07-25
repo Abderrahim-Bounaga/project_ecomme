@@ -48,13 +48,13 @@
                                 $product_desc = $row['product_desc'];
                                 $product_info = $row['product_info'];
                                 $product_price = $row['product_price'];
-                              //  $product_date = $row['product_date'];
+                               $product_date = $row['product_date'];
 
 
                                 echo "<tr>";
                                 echo "<td>$product_id</td>";
                                 echo "<td>$product_title</td>";
-                                echo "<td><img class= 'img-responsive' src='../img/$product_image' alt=''></td>";
+                                echo "<td><img class= 'img-responsive' src='../img/$product_image' alt='' width='100' height='100'></td>";
                                 echo "<td>$product_desc</td>";
                                 echo "<td>$product_info</td>";
                                 echo "<td>$product_price</td>";

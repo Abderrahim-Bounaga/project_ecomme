@@ -155,12 +155,90 @@ if (isset($_POST['add_sou_categories'])) {
                     </form>
 
                 </div>
-                <table class="table table-bordered table-hover">
+               
+<?php include "db.php" ?>
 
-                <thead>
+
+
+
+<?php 
+function categories()
+{
+	
+	include "db.php";
+	$sql = "SELECT * FROM categories ";
+	$result = $db->query($sql);
+	
+	$categories = array();
+	
+	while($row = $result->fetch_assoc())
+	{
+		$categories[] = array(
+
+			'Id' => $row['Id'],
+			'Category_image' => $row['Category_image'],
+
+
+			
+			'Category_title' => $row['Category_title'],
+			'Id' => sub_categories($row['Id']),
+		);
+	}
+	
+	return $categories;
+}
+
+
+function sub_categories($id)
+{	
+	include "db.php";
+
+	
+	$sql = "SELECT Sou_Category_title FROM sou_category  WHERE Id = $id ";
+	$result = $db->query($sql);
+	
+	$categories = array();
+	
+	while($row = $result->fetch_assoc())
+	{
+		$categories[] = array(
+			
+			'Sou_Category_title' => ($row['Sou_Category_title']),
+		);
+	}
+	return $categories;
+}
+?>
+
+
+<?php
+function viewsubcat($categories)
+{
+	$html = '<ul> ';
+
+
+	if (is_array($categories) || is_object($categories))
+{
+  // If yes, then foreach() will iterate over it.
+  foreach($categories as $category){
+
+	$html .= '<li>'.$category['Sou_Category_title'].'</li>';
+	
+	
+}
+
+	
+	}
+	$html .= '</ul>';
+	
+	return $html;
+}
+?>
+ <table class="table table-bordered table-hover">
+ <thead>
                     <tr>
                 
-                        <th>Id</th>
+                        
                         <th>Title</th>                       
                         <th>Image</th>
                         <th>souCatigores</th>
@@ -169,79 +247,34 @@ if (isset($_POST['add_sou_categories'])) {
                         <th>archive</th>
                     </tr>
                 </thead>
-                
-                      <tbody>
-                      <?php 
-                             $query = "SELECT * FROM categories " ;  
 
-                            $load_products_query = mysqli_query($db,$query);
-                            
-  
-                           
+<?php $categories = categories(); ?>
+
+<?php foreach($categories as $category){
+	?>
 
 
-
-                            if (!$load_products_query) {
-                                die("QUERY FAILED". mysqli_error($db));
-                            }
-
-                            while ($row = mysqli_fetch_array($load_products_query)) {
-                                $Category_id = $row['Id'];
-                                $Category_title = $row['Category_title'];
-                                $Category_image = $row['Category_image'];
-                                $Category_title = $row['Category_title'];
-
-                               
-                               
-                                
-
-                                echo "<tr>";
-                                echo "<td>$Category_id</td>";
-                                echo "<td>$Category_title</td>";
-                                echo "<td><img class= 'img-responsive' src='../img/$Category_image' alt='' width='100' height='100'></td>";
-                               
-                               
-
-                                $query_sou_category = "SELECT * FROM sou_category LEFT JOIN categories ON sou_category.Sou_Category_id = categories.Id WHERE Id = $Category_id" ;
-                                $load_sou_category_query = mysqli_query($db,$query_sou_category);
-                                
-                                while ($row_sou_category = mysqli_fetch_array($load_sou_category_query)) {
-
-                                    $Sou_Category_title = $row_sou_category['Sou_Category_title'];
-
-                                
-                                }
- 
+		
 
 
-                               
-                                echo "<td>
-                                <li >
-                                    $Sou_Category_title </li >
-                                
-                                </td>";
+		
+	<tr>
+                               <td><?php echo $category['Category_title'] ?></td>
+                               <td><img class= 'img-responsive' src='../img/<?php echo $category['Category_image'] ?>' alt='' width='100' height='100'></td>
+                               <td>	<?php 
+			if( ! empty($category['Id'])){
+				echo viewsubcat($category['Id']);
+			} 
+		?></td>
 
-                                echo "<td> <a href='edit_product.php?edit='>Edit</a></td>";
-                                echo "<td><a href='view_products.php?delete='>Delete</a></td>";
-                                echo "</tr>";
-                            }
-
-                            if (isset($_GET['delete'])) {
-                                $deleted_product_id = $_GET['delete'];
-
-                                $query_UPDATE = "UPDATE products SET product_archif = '1' WHERE product_id = $deleted_product_id";
-                                $edit_product_query = mysqli_query($db,$query_UPDATE);
-
-                                header('Location: view_products.php');
-                            }
+<td><a href='edit_product.php?edit='>Edit</a></td>
+<td><a href='edit_product.php?edit='>Edit</a></td>
 
 
-                           
+	</tr>
+<?php } ?>
 
-                        ?>
 
-                      </tbody>
-            </table>
             
 
             </div>

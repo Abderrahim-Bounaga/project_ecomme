@@ -1,7 +1,10 @@
 <?php 
 session_start();
-include "admin_header.php"
- ?>
+include "admin_header.php" 
+?>
+
+
+
 
 
             <div class="container-fluid">
@@ -10,7 +13,7 @@ include "admin_header.php"
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Product List
+                            Archive Product 
                         </h1>
                         
                     </div>
@@ -28,14 +31,13 @@ include "admin_header.php"
                         <th>Price</th>
                         <th>Date</th>
                         <th>Edit</th>
-                        <th>archive</th>
-                        <th>Delete</th>
+                        <th>Add product</th>
                     </tr>
                 </thead>
                 
                       <tbody>
                       <?php 
-                            $query = "SELECT * FROM products  WHERE product_archive = '0'" ;
+                            $query = "SELECT * FROM products  WHERE product_archive = '1'" ;
                             $load_products_query = mysqli_query($db,$query);
 
                             if (!$load_products_query) {
@@ -61,28 +63,21 @@ include "admin_header.php"
                                 echo "<td>$product_price</td>";
                                 echo "<td>$product_date</td>";
                                 echo "<td> <a href='edit_product.php?edit=$product_id'>Edit</a></td>";
-                                echo "<td><a href='view_products.php?archiver=$product_id'>archiver</a></td>";
-                                echo "<td><a href='view_products.php?delete=$product_id'>Delete</a></td>";
+                                echo "<td><a href='archive_product.php?add=$product_id'>add to products</a></td>";
                                 echo "</tr>";
                             }
 
-                            if (isset($_GET['archiver'])) {
-                                $archive_product_id = $_GET['archiver'];
+                            if (isset($_GET['add'])) {
+                                $add_product_id = $_GET['add'];
 
-                                $query_archive = "UPDATE products SET product_archive ='1' WHERE product_id = '$archive_product_id'";
-                                $archive_product_query = mysqli_query($db,$query_archive);
+                                $query_added = "UPDATE products SET product_archive = '0' WHERE product_id = $add_product_id";
+                                $edit_product_query = mysqli_query($db,$query_added);
 
-                                header('Location: view_products.php');
+                                header('Location: archive_product.php');
                             }
-                            
-                            if (isset($_GET['delete'])) {
-                                $deleted_product_id = $_GET['delete'];
 
-                                $delete_query = "DELETE FROM products WHERE product_id = '$deleted_product_id'";
-                                $deleted_product_query = mysqli_query($db,$delete_query);
 
-                                header('Location: view_products.php');
-                            }  
+                           
 
                         ?>
 

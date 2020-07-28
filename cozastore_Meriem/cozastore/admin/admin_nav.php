@@ -132,6 +132,9 @@
                             <li>
                                 <a href="add_product.php">Add Products</a>
                             </li>
+                            <li>
+                                <a href="archive_product.php">Archive Products</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

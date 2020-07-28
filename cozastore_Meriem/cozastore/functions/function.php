@@ -2,6 +2,45 @@
 
 $db = mysqli_connect('Localhost','root','','fashion');
 
+/// start getIpUser ///
+function getIpUser(){
+     switch(true){
+        case(!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
+        case(!empty($_SERVER['HTTP_CLIENT_IP'])) : return $_SERVER['HTTP_CLIENT_IP'];
+        case(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+        default : return $_SERVER['REMOTE_ADDR'];
+     }
+}
+
+/// start add_cart ///
+
+function add_cart(){
+    global $db;
+    if(isset($_GET['add_cart'])){
+        $ip_add = getIpUser();
+        $p_id = $_GET['add_cart'];
+        $product_size = $_POST['product_size'];
+        $product_color = $_POST['product_color'];
+        $product_qty = $_POST['product_qty'];
+
+        $check_product = "SELECT * FROM cart WHERE ip_add='$ip_add' AND p_id='$p_id'";
+        $run_check = mysqli_query($db, $check_product);
+        if(mysqli_num_rows($run_check) > 0){
+            echo " <script>alert('this product has already added in your cart')</script>";
+            echo " <script>window.open('product-detail.php?products_id=$p_id','_self')</script>";
+            
+        }else{
+            $query = "INSERT INTO cart (p_id,ip_add,size,color,qty) VALUES ('$p_id','$ip_add','$product_size','$product_color','$product_qty')";
+            $run_query = mysqli_query($db,$query);
+            echo " <script>window.open('product-detail.php?products_id=$p_id','_self')</script>";
+        };
+    }
+}
+
+/// finish add_cart ///
+/// finish getIpUser ///
+
 /// start add product in page home///
 function addProduct(){
     global $db;
@@ -195,7 +234,7 @@ function getcategoreis(){
         $run_cat = mysqli_query($db, $get_cat);
         $row_cat =mysqli_fetch_array($run_cat);
         
-        $get_products = "SELECT * FROM products WHERE cat_id='$cat_id'";
+        $get_products = "SELECT * FROM products WHERE cat_id='$cat_id' LIMIT 0,6";
         $run_products = mysqli_query($db, $get_products);
         $count = mysqli_num_rows($run_products);
 
@@ -244,6 +283,17 @@ function getcategoreis(){
 
 /// end  function product by catego in page product sideBar///
 
+/// start  function item///
+function items(){
+    global $db;
+    
+    $ip_add = getIpUser();
+    $get_item = "SELECT * FROM cart WHERE ip_add='$ip_add'";
+    $run_item = mysqli_query($db, $get_item);
+    $count = mysqli_num_rows($run_item);
+    echo $count;
+}
+/// end  function item///
 ?>
 
 

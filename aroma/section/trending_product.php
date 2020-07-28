@@ -29,7 +29,7 @@
           <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="card text-center card-product">
               <div class="card-product__img">
-              <img src="img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
+              <img src="img/product/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
                 <ul class="card-product__imgOverlay">
                   <li><button><i class="ti-search"></i></button></li>
                   <li><button> <a href = "cart.php?item=<?php echo $product_id ?>"  data-dismiss="modal"><i class="ti-shopping-cart"></a></i></button>

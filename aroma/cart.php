@@ -1,6 +1,5 @@
+
 <?php include "db.php" ?>
-
-
 <?php
 
 
@@ -16,8 +15,6 @@ if (isset($_SESSION['id'])) {
 
 
 <?php 
-    $welcome = $_SESSION['welcome'];
-	$contor = $_SESSION['contor'] ;
 
     //getting the session id
     if (isset($_SESSION['id'])) {
@@ -73,6 +70,7 @@ if (isset($_SESSION['id'])) {
     }
     } 
 ?>
+
 <?php
 						if (isset($_GET['remove'])) {
                                 $removed_item_id = $_GET['remove'];
@@ -118,6 +116,7 @@ if (isset($_SESSION['id'])) {
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,15 +133,8 @@ if (isset($_SESSION['id'])) {
   <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
   <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
   <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
-  
 
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-
-
-
-	
 </head>
 <body>
   <!--================ Start Header Menu Area =================-->
@@ -171,60 +163,57 @@ if (isset($_SESSION['id'])) {
   
 
   <!--================Cart Area =================-->
-<!-- Cart -->
-<section class="cart bgwhite p-t-70 p-b-100">
-		<div class="container">
-			<!-- Cart item -->
-			<div class="container-table-cart pos-relative">
-				<div class="wrap-table-shopping-cart bgwhite">
-					<table class="table-shopping-cart ">
-						<tr class="table-head">
-							<th class="column-1"></th>
-							<th class="column-2">Product</th>
-                    
-							<th class="column-3">Price</th>
-							<th class="column-4 p-l-70">Quantity</th>
-							<th class="column-5">Total</th>
-							
-						</tr>
-					
-						<?php 
+  <section class="cart_area">
+      <div class="container">
+          <div class="cart_inner">
+              <div class="table-responsive">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th scope="col">Product</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Total</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <?php 
                             	
-                            $cart_query = "SELECT * FROM cart WHERE client_id = $client_id";
-							$cart_search_query = mysqli_query($connection,$cart_query);
-							$total_final= 0;
-						
-
-                            while ($row = mysqli_fetch_array($cart_search_query)) {
+                                $cart_query = "SELECT * FROM cart WHERE client_id = $client_id";
+                                $cart_search_query = mysqli_query($connection,$cart_query);
+                                $total_final= 0;
+                            
+    
+                                while ($row = mysqli_fetch_array($cart_search_query)) {
+                                    
+                                    $cart_id = $row['item_id'];
+                                    $item_title = $row['item_title'];
+                                    $item_image = $row['item_image'];
+                                    $item_price = $row['item_price'];
+                                    $item_quantity = $row['item_quantity'];
+                                    $total = $item_price * $item_quantity;
+                                    
+                                    
+                            $total_final=$total_final+$total;
                                 
-                                $cart_id = $row['item_id'];
-                                $item_title = $row['item_title'];
-                                $item_image = $row['item_image'];
-                                $item_price = $row['item_price'];
-                                $item_quantity = $row['item_quantity'];
-								$total = $item_price * $item_quantity;
-								
-								
-						$total_final=$total_final+$total;
-                            
-                       
-
-                            
-
-                            
-?>
-						<tr class="table-row">
-						
-							<td class="column-1">
-								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="img/<?php echo $item_image ?>" alt="<?php echo $item_title ?>">
-								</div>
-							</td>
-							<td class="column-2"><?php  echo $item_title ?></td>
-							<td class="column-3">$<?php echo $item_price ?></td>
-							<td class="column-4">
-								<div class="flex-w bo5 of-hidden w-size17">
-									<a href='cart.php?reduce=<?php echo $cart_id ?>&user=<?php echo $client_id?>' class=" color1 flex-c-m size7 bg8 eff2">										
+    ?>
+                          <tr>
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="img/product/<?php echo $item_image ?>" alt="<?php echo $item_title ?> " width='100' height='100'>
+                                      </div>
+                                      <div class="media-body">
+                                          <p><?php  echo $item_title ?></p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5><?php echo $item_price ?></h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                  <a href='cart.php?reduce=<?php echo $cart_id ?>&user=<?php echo $client_id?>' class=" color1 flex-c-m size7 bg8 eff2">										
 											<i class="fs-12 fa fa-minus" aria-hidden="true" name="reduce"></i>									
 									</a>
 
@@ -233,122 +222,114 @@ if (isset($_SESSION['id'])) {
 									<a href='cart.php?add=<?php echo $cart_id?>&user=<?php echo $client_id ?>' class=" color1 flex-c-m size7 bg8 eff2">
 										<i class="fs-12 fa fa-plus" aria-hidden="true" name="add"></i>
 									</a>
-								</div>
-							</td>
-							<td class="column-5">$<?php echo $total ?></td>
-							<td><a href='cart.php?remove=<?php echo $cart_id?>&user=<?php echo $client_id ?>'>Remove</a></td> 
-						</tr>
-						<?php
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>$<?php echo $total ?></h5>
+                              </td>
+                          </tr>
+                          <?php
 							}
 							$_SESSION['contor'] = $contor;
                         ?>
-						
 
-						
-					</table>
-				</div>
-			</div>
 
-			<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
-				<div class="flex-w flex-m w-full-sm">
-					<div class="size11 bo4 m-r-10">
-						<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">
-					</div>
 
-					<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
-						<!-- Button -->
-						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-							Apply coupon
-						</button>
-					</div>
-				</div>
+                          
+                          
 
-				<div class="size10 trans-0-4 m-t-10 m-b-10">
-					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-						Update Cart
-					</button>
-				</div>
-			</div>
 
-			<!-- Total -->
-			<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-				<h5 class="m-text20 p-b-24">
-					Cart Totals
-				</h5>
 
-				<!--  -->
-				<div class="flex-w flex-sb-m p-b-12">
-					<span class="s-text18 w-size19 w-full-sm">
-						Subtotal:
-					</span>
 
-					<span class="m-text21 w-size20 w-full-sm">
-						$<?php echo $total_final ?>
-					</span>
-				</div>
+                          <tr class="bottom_button">
+                              <td>
+                                  <a class="button" href="#">Update Cart</a>
+                              </td>
+                              <td>
 
-				<!--  -->
-				<div class="flex-w flex-sb bo10 p-t-15 p-b-20">
-					<span class="s-text18 w-size19 w-full-sm">
-						Shipping:
-					</span>
+                              </td>
+                              <td>
 
-					<div class="w-size20 w-full-sm">
-						<p class="s-text8 p-b-23">
-							There are no shipping methods available. Please double check your address, or contact us if you need any help.
-						</p>
+                              </td>
+                              <td>
+                                  <div class="cupon_text d-flex align-items-center">
+                                      <input type="text" placeholder="Coupon Code">
+                                      <a class="primary-btn" href="#">Apply</a>
+                                      <a class="button" href="#">Have a Coupon?</a>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
 
-						<span class="s-text19">
-							Calculate Shipping
-						</span>
+                              </td>
+                              <td>
 
-						<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-							<select class="selection-2" name="country">
-								<option>Select a country...</option>
-								<option>US</option>
-								<option>UK</option>
-								<option>Japan</option>
-							</select>
-						</div>
+                              </td>
+                              <td>
+                                  <h5>Subtotal</h5>
+                              </td>
+                              <td>
+                                  <h5>$<?php echo $total_final ?></h5>
+                              </td>
+                          </tr>
+                          <tr class="shipping_area">
+                              <td class="d-none d-md-block">
 
-						<div class="size13 bo4 m-b-12">
-						<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
-						</div>
+                              </td>
+                              <td>
 
-						<div class="size13 bo4 m-b-22">
-							<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">
-						</div>
+                              </td>
+                              <td>
+                                  <h5>Shipping</h5>
+                              </td>
+                              <td>
+                                  <div class="shipping_box">
+                                      <ul class="list">
+                                          <li><a href="#">Flat Rate: $5.00</a></li>
+                                          <li><a href="#">Free Shipping</a></li>
+                                          <li><a href="#">Flat Rate: $10.00</a></li>
+                                          <li class="active"><a href="#">Local Delivery: $2.00</a></li>
+                                      </ul>
+                                      <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                      <select class="shipping_select">
+                                          <option value="1">Bangladesh</option>
+                                          <option value="2">India</option>
+                                          <option value="4">Pakistan</option>
+                                      </select>
+                                      <select class="shipping_select">
+                                          <option value="1">Select a State</option>
+                                          <option value="2">Select a State</option>
+                                          <option value="4">Select a State</option>
+                                      </select>
+                                      <input type="text" placeholder="Postcode/Zipcode">
+                                      <a class="gray_btn" href="#">Update Details</a>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr class="out_button_area">
+                              <td class="d-none-l">
 
-						<div class="size14 trans-0-4 m-b-10">
-							<!-- Button -->
-							<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-								Update Totals
-							</button>
-						</div>
-					</div>
-				</div>
+                              </td>
+                              <td class="">
 
-				<!--  -->
-				<div class="flex-w flex-sb-m p-t-26 p-b-30">
-					<span class="m-text22 w-size19 w-full-sm">
-						Total:
-					</span>
+                              </td>
+                              <td>
 
-					<span class="m-text21 w-size20 w-full-sm">
-						$<?php echo $total ?>
-					</span>
-				</div>
-
-				<div class="size15 trans-0-4">
-					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-						Proceed to Checkout
-					</button>
-				</div>
-			</div>
-		</div>
-	</section>
+                              </td>
+                              <td>
+                                  <div class="checkout_btn_inner d-flex align-items-center">
+                                      <a class="gray_btn" href="category.php">Continue Shopping</a>
+                                      <a class="primary-btn ml-2" href="#">Proceed to checkout</a>
+                                  </div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </section>
   <!--================End Cart Area =================-->
 
 
@@ -370,6 +351,8 @@ if (isset($_SESSION['id'])) {
   <script src="js/main.js"></script>
 </body>
 </html>
+
+
 
 <?php
 

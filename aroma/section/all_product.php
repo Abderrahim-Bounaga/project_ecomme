@@ -20,7 +20,27 @@
                 ";   
               $load_products_query = mysqli_query($connection,$query);
 
-            }else{
+            }
+            elseif  (isset($_GET['sub_ctgry'])) {
+              $sub_ctgry = $_GET['sub_ctgry'];
+            
+             $start_from = ($page-1) * $per_page;
+
+              $query = "SELECT * FROM products  LEFT JOIN sou_category ON products.Sou_CategoryId = sou_category.Id  WHERE Sou_CategoryId =$sub_ctgry AND product_archif=0 ORDER BY 1 DESC LIMIT $start_from,$per_page  
+                ";   
+              $load_products_query = mysqli_query($connection,$query);
+
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            else{
              
 
               $start_from = ($page-1) * $per_page;
@@ -47,9 +67,9 @@
               <div class="col-md-6 col-lg-4">
                 <div class="card text-center card-product">
                   <div class="card-product__img">
-                  <img src="img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
+                  <img src="img/product/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
                     <ul class="card-product__imgOverlay">
-                      <li><button><i class="ti-search"></i></button></li>
+                      <li><button><a href = "single-product.php?item=<?php echo $product_id ?>"  data-dismiss="modal"><i class="ti-search"></i></a></button></li>
                       <li><button> <a href = "cart.php?item=<?php echo $product_id ?>"  data-dismiss="modal"><i class="ti-shopping-cart"></a></i></button>
                       </li>
                       <li><button><i class="ti-heart"></i></button></li>

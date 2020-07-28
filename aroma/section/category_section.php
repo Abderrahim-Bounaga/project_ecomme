@@ -1,3 +1,85 @@
+
+<?php 
+function categories()
+{
+	
+	include "db.php";
+	$sql = "SELECT * FROM categories ";
+	$result = $connection->query($sql);
+	
+	$categories = array();
+	
+	while($row = $result->fetch_assoc())
+	{
+
+		$categories[] = array(
+
+
+			'Id' => $row['Id'],
+				
+			'Category_title' => $row['Category_title'],
+      'Id' => sub_categories($row['Id']),
+      
+      'Id_categories' => $row['Id'],
+		);
+	}
+	
+	return $categories;
+}
+
+
+function sub_categories($id)
+{	
+	include "db.php";
+
+	
+	$sql = "SELECT * FROM sou_category  WHERE Id = $id ";
+	$result = $connection->query($sql);
+	
+	$categories = array();
+	
+	while($row = $result->fetch_assoc())
+	{
+		$categories[] = array(
+			
+      'Sou_Category_title' => ($row['Sou_Category_title']),
+      'Id_Sou_categories' => $row['Sou_Category_id'],
+		);
+	}
+	return $categories;
+}
+?>
+
+
+<?php
+function viewsubcat($categories)
+{
+	$html = '<ul> ';
+
+
+	if (is_array($categories) || is_object($categories))
+{
+  // If yes, then foreach() will iterate over it.
+  foreach($categories as $category){
+
+    $Sou_categoryId=$category['Id_Sou_categories'];
+
+
+	$html .= '<li>&nbsp &nbsp &nbsp &nbsp<a href="category.php?sub_ctgry='. $Sou_categoryId.'">'.$category['Sou_Category_title'].'</a></li>';
+	
+	
+}
+
+	
+	}
+	$html .= '</ul>';
+	
+	return $html;
+}
+?>
+
+
+
 <section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
@@ -7,14 +89,29 @@
             <ul class="main-categories">
               <li class="common-filter">
                 <form action="category_section.php"  method="post">
-                  <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"  ><label for="men"><a href="category.php?item_ctgry=<?php echo '1' ?>">eyes<span> (3600)</span></a></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="brand"><label for="women"><a href="category.php?item_ctgry=<?php echo '2' ?>">face<span> (3600)</span></a></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="brand"><label for="accessories"><a href="category.php?item_ctgry=<?php echo '3' ?>">Fcheeks<span> (3600)</span></a></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="brand"><label for="bayItem"><a href="category.php?item_ctgry=<?php echo '4' ?>">brows<span> (3600)</span></a></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="brand"><label for="electronics"><a href="category.php?item_ctgry=<?php echo '5' ?>">lips<span> (3600)</span></a></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food"><a href="category.php?item_ctgry=<?php echo '6' ?>">nails<span> (3600)</span></label></a></li>
-                  </ul>
+
+                <?php $categories = categories(); ?>
+
+<?php
+
+foreach($categories as $category){
+
+
+$categoryId=$category['Id_categories'];
+  
+	?>
+
+<ul><li  ><a href="category.php?item_ctgry=<?php echo $categoryId ?>"><?php echo $category['Category_title'] ?></a></li> 
+                           
+                               	<?php 
+			if( ! empty($category['Id'])){
+				echo viewsubcat($category['Id']);
+      } 
+      echo" <ul>	";
+		?>
+<?php } ?>
+
+
                 </form>
               </li>
             </ul>

@@ -98,7 +98,7 @@
                       <?php 
                             
                             $cart_query = "SELECT * FROM cart WHERE client_id = $client_id";
-                            $cart_search_query = mysqli_query($connection,$cart_query);
+                            $cart_search_query = mysqli_query($db,$cart_query);
                             while ($row = mysqli_fetch_array($cart_search_query)) {
                                 
                                 $cart_id = $row['item_id'];
@@ -112,7 +112,7 @@
                                 echo "<tr>";
                                 echo "<td>$cart_id</td>";
                                 echo "<td>$item_title</td>";
-                                echo "<td><img class= 'img-responsive' src='../img/$item_image' alt=''></td>";
+                                echo "<td><img class='img-responsive' src='../img/$item_image' alt=''></td>";
                                 echo "<td>$item_price</td>";
                                 echo "<td>$item_quantity</td>";
                                 echo "<td>$total</td>";

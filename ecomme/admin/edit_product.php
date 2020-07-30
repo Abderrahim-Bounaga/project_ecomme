@@ -6,7 +6,7 @@ if (isset($_GET['edit'])) {
 }
 
 $edit_query = "SELECT * FROM products WHERE product_id = $pro_id ";
-$load_product_query = mysqli_query($connection,$edit_query);
+$load_product_query = mysqli_query($db,$edit_query);
 
 while($row = mysqli_fetch_array($load_product_query)){
 $p_id = $row['product_id'];
@@ -15,6 +15,9 @@ $p_image = $row['product_image'];
 $p_desc = $row['product_desc'];
 $p_info = $row['product_info'];
 $p_price = $row['product_price'];
+$p_trend = $row['trend_product'];
+$p_promo = $row['promotion'];
+$pro_price = $row['promo_price'];
 }
 
 if (isset($_POST['edit_product'])) {
@@ -24,19 +27,23 @@ if (isset($_POST['edit_product'])) {
     $product_desc = $_POST['product_desc'];
     $product_info = $_POST['product_info'];
     $product_price = $_POST['product_price'];
+    $trend_product = $_POST['trend_product'];
+    $promotion = $_POST['promotion'];
+    $promo_price = $_POST['promo_price'];
 
-    move_uploaded_file($product_image_temp, "../img/$product_image");
+    move_uploaded_file($product_image_temp, "/img/$product_image");
 
-    $product_title = mysqli_real_escape_string($connection,$product_title);
-    $product_image = mysqli_real_escape_string($connection,$product_image);
-    $product_desc = mysqli_real_escape_string($connection,$product_desc);
-    $product_info = mysqli_real_escape_string($connection,$product_info);
+    $product_title = mysqli_real_escape_string($db,$product_title);
+    $product_image = mysqli_real_escape_string($db,$product_image);
+    $product_desc = mysqli_real_escape_string($db,$product_desc);
+    $trend_product = mysqli_real_escape_string($db,$trend_product);
+    $product_info = mysqli_real_escape_string($db,$product_info);
 
-    $query = "UPDATE products SET product_title = '$product_title' ,product_image ='$product_image', product_desc = '$product_desc', product_info = '$product_info', product_price = '$product_price'  WHERE product_id = $p_id ";
-    $edit_product_query = mysqli_query($connection,$query);
+    $query = "UPDATE products SET product_title = '$product_title' ,trend_product ='$trend_product',product_image ='$product_image', product_desc = '$product_desc', product_info = '$product_info', product_price = '$product_price' , promotion = '$promotion' , promo_price = '$promo_price' WHERE product_id = $p_id ";
+    $edit_product_query = mysqli_query($db,$query);
 
     if (!$edit_product_query) {
-        die("QUERY FAILED". mysqli_error($connection));
+        die("QUERY FAILED". mysqli_error($db));
     }
 
     
@@ -80,7 +87,19 @@ if (isset($_POST['edit_product'])) {
                         <label for="product_image">Product Image</label>
                         <input type="file"  name="image">
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="title">trend product</label>
+                        <!-- <input type="text" class="form-control" name="product_title"> -->
+                        <select name="trend_product" class="form-control" >
+                        
+                        <option value="<?php echo $p_trend ?>"> non </option>
+                        <option value="1" >oui </option>
+                          
+                          
 
+                        </select>
+                    </div>
                     
                     <div class="form-group">
                         <label for="product_desc">Product Description</label>
@@ -94,6 +113,23 @@ if (isset($_POST['edit_product'])) {
                     <div class="form-group">
                         <label for="product_price">Product Price</label>
                         <input type="number" value = "<?php echo $p_price ?>" class="form-control" name="product_price">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Promotion</label>
+                        <!-- <input type="text" class="form-control" name="product_title"> -->
+                        <select name="promotion" class="form-control" >
+                        
+                        <option value="<?php echo $p_promo ?>"> non </option>
+                        <option value="1" >oui </option>
+                          
+                          
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_price">Promotion Price</label>
+                        <input type="number" value = "<?php echo $pro_price ?>" class="form-control" name="promo_price">
                     </div>
                     
                     

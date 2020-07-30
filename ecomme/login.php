@@ -76,7 +76,7 @@ if (isset($_POST['login'])) {
     if ($row_count < 1) {
         $messageL = "<div class='alert alert-danger'>this email does not exist, try again or <a href='register.php'>register</a> </div>";;
     }else {
-        if ($password=== $hash) {
+        if (password_verify($password, $hash)) {
             $messageL = "<div class='alert alert-success'>Welcome $db_fname </div>";
             $_SESSION['id'] = $db_id;
             $_SESSION['firstname'] = $db_fname;
@@ -85,7 +85,7 @@ if (isset($_POST['login'])) {
 
 
 
-           header('Location: blog.php');
+           header('Location: cart.php');
         } else{
             $messageL =  "<div class='alert alert-danger'>$hash your password $password in incorrect id :$db_id</div>";
         }

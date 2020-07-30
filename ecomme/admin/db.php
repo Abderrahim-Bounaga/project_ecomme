@@ -1,7 +1,7 @@
 
 <?php 
 
-    $connection = mysqli_connect('Localhost','root','','ecomme');
+    $db = mysqli_connect('Localhost','root','','ecomme');
 
 ?>
 

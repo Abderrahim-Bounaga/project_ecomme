@@ -31,10 +31,10 @@
                       <tbody>
                       <?php 
                             $query = "SELECT * FROM users";
-                            $load_users_query = mysqli_query($connection,$query);
+                            $load_users_query = mysqli_query($db,$query);
 
                             if (!$load_users_query) {
-                                die("QUERY FAILED". mysqli_error($connection));
+                                die("QUERY FAILED". mysqli_error($db));
                             }
 
                             while ($row = mysqli_fetch_array($load_users_query)) {
@@ -56,7 +56,7 @@
                                 $deleted_user_id = $_GET['delete'];
 
                                 $delete_query = "DELETE FROM users WHERE id = $deleted_user_id";
-                                $deleted_user_query = mysqli_query($connection,$delete_query);
+                                $deleted_user_query = mysqli_query($db,$delete_query);
 
                                 header('Location: users.php');
                             }

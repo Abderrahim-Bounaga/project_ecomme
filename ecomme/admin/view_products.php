@@ -26,19 +26,20 @@
                         <th>Description</th>
                         <th>Info</th>
                         <th>Price</th>
+                        <th>Promo_Price</th>
                         <th>Date</th>
                         <th>Edit</th>
-                        <th>Delete</th>
+                        <th>archive</th>
                     </tr>
                 </thead>
                 
                       <tbody>
                       <?php 
-                            $query = "SELECT * FROM products";
-                            $load_products_query = mysqli_query($connection,$query);
+                            $query = "SELECT * FROM products  WHERE product_archif = '0'" ;
+                            $load_products_query = mysqli_query($db,$query);
 
                             if (!$load_products_query) {
-                                die("QUERY FAILED". mysqli_error($connection));
+                                die("QUERY FAILED". mysqli_error($db));
                             }
 
                             while ($row = mysqli_fetch_array($load_products_query)) {
@@ -48,16 +49,18 @@
                                 $product_desc = $row['product_desc'];
                                 $product_info = $row['product_info'];
                                 $product_price = $row['product_price'];
-                                $product_date = $row['product_date'];
+                                $promo_price = $row['promo_price'];
+                               $product_date = $row['product_date'];
 
 
                                 echo "<tr>";
                                 echo "<td>$product_id</td>";
                                 echo "<td>$product_title</td>";
-                                echo "<td><img class= 'img-responsive' src='../img/$product_image' alt=''></td>";
+                                echo "<td><img class= 'img-responsive' src='img/$product_image' alt='' width='100' height='100'></td>";
                                 echo "<td>$product_desc</td>";
                                 echo "<td>$product_info</td>";
                                 echo "<td>$product_price</td>";
+                                echo "<td>$promo_price</td>";
                                 echo "<td>$product_date</td>";
                                 echo "<td> <a href='edit_product.php?edit=$product_id'>Edit</a></td>";
                                 echo "<td><a href='view_products.php?delete=$product_id'>Delete</a></td>";
@@ -67,11 +70,14 @@
                             if (isset($_GET['delete'])) {
                                 $deleted_product_id = $_GET['delete'];
 
-                                $delete_query = "DELETE FROM products WHERE product_id = $deleted_product_id";
-                                $deleted_product_query = mysqli_query($connection,$delete_query);
+                                $query_UPDATE = "UPDATE products SET product_archif = '1' WHERE product_id = $deleted_product_id";
+                                $edit_product_query = mysqli_query($db,$query_UPDATE);
 
                                 header('Location: view_products.php');
                             }
+
+
+                           
 
                         ?>
 

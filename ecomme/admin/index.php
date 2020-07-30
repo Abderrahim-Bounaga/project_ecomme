@@ -1,6 +1,4 @@
-<?php 
-$db = mysqli_connect("localhost","root","","ecomme");
- ?>
+<?php include "db.php"; ?>
 
 
 <?php
@@ -48,7 +46,7 @@ if (isset($_SESSION['id_admin'])) {
 
 }
 else {
-    header("location:../admin.php");
+    header("location:admin.php");
     
 
 }

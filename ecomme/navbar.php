@@ -35,7 +35,7 @@
 
                             // echo "<a href='admin'>Admin</a>";
                             // echo "</li>";
-                            echo $full_name ;
+                            echo "Welcom". " " .$full_name ;
 
                         }else{
                             echo "your name" ;
@@ -54,7 +54,7 @@
 			<div class="wrap_header">
 				<!-- Logo -->
 				<a href="index.php" class="logo">
-					<img src="images/icons/logo.png" alt="IMG-LOGO">
+					<img src="images/icons/BrandWT.png" alt="IMG-LOGO" width='150' height=''>
 				</a>
 
 				<!-- Menu -->
@@ -63,28 +63,31 @@
 						<ul class="main_menu">
 							<li>
 								<a href="index.php">Home</a>
-								<ul class="sub_menu">
+								<!-- <ul class="sub_menu">
 									<li><a href="index.php">Homepage V1</a></li>
 									<li><a href="home-02.php">Homepage V2</a></li>
 									<li><a href="home-03.php">Homepage V3</a></li>
-								</ul>
+								</ul> -->
 							</li>
 
 							<li>
 								<a href="product.php">Shop</a>
 							</li>
 
-							<li class="sale-noti">
+							<!-- <li class="sale-noti">
 								<a href="product.php">Sale</a>
-							</li>
+							</li> -->
 
 							<li>
 								<a href="cart.php">Features</a>
 							</li>
-
 							<li>
-								<a href="blog.php">Blog</a>
+								<a href="promotion.php">Promotion</a>
 							</li>
+
+							<!-- <li>
+								<a href="blog.php">Blog</a>
+							</li> -->
 
 							<li>
 								<a href="about.php">About</a>
@@ -135,11 +138,31 @@
 					</a>
 
 					<span class="linedivide1"></span>
+					
+
+						<?php
+						$query = "SELECT COUNT(*) as total FROM `cart` ";
+						$shop_query = mysqli_query($db,$query);
+						$data=mysqli_fetch_assoc($shop_query);
+
+						$contor = $data['total'];
+
+
+
+						?>
 
 					<div class="header-wrapicon2">
-						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+					<?php 
 
+						if (isset($_SESSION['id'])) {
+						$welcome = $_SESSION['welcome']; ?>
+						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<span class="header-icons-noti"><?php echo $contor ?></span> 
+					<?php
+						}else{
+						echo "<img src='images/icons/icon-header-02.png' class='header-icon1 js-show-header-dropdown' alt='ICON'>";
+						echo "<span class='header-icons-noti'>0</span>"; 
+					}?>
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
@@ -358,11 +381,11 @@
 
 					<li class="item-menu-mobile">
 						<a href="index.php">Home</a>
-						<ul class="sub-menu">
+						<!-- <ul class="sub-menu">
 							<li><a href="index.php">Homepage V1</a></li>
 							<li><a href="home-02.php">Homepage V2</a></li>
 							<li><a href="home-03.php">Homepage V3</a></li>
-						</ul>
+						</ul> -->
 						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 					</li>
 

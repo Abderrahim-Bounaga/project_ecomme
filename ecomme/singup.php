@@ -69,7 +69,8 @@ if(isset($_POST['submit'])){
         $row = $result->fetch_assoc();
 
         
- 
+		$password = password_hash($password, PASSWORD_DEFAULT);
+
         $tst = $db->prepare ("INSERT INTO users (firstname, lastname, email, password)VALUES('$firstname','$lastname','$email','$password')");
 
         $tst->execute();

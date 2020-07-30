@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
     // $email = mysqli_real_escape_string($db,$email);
     // $password = mysqli_real_escape_string($db,$password);
    
-    $query = "SELECT * FROM admin_users WHERE email = '{$email}'";
+    $query = "SELECT * FROM adminusers WHERE email_admin = '{$email}'";
     $login_query = mysqli_query($db,$query);
 
 
@@ -62,7 +62,7 @@ if (isset($_POST['submit'])) {
 
     while($row = mysqli_fetch_assoc($login_query)){
         $db_id = $row['id_admin'];
-        $db_email = $row['email'];
+        $db_email = $row['email_admin'];
         $hash = $row['password'];
         $db_fname = $row['firstname'];
         $db_lname = $row['lastname'];

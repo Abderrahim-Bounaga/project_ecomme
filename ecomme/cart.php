@@ -1,6 +1,15 @@
-<?php include "db.php" ?>
+<?php include "db.php"; ?>
 
-<?php session_start(); ?>
+
+<?php
+
+session_start();
+if (isset($_SESSION['id'])) {
+    $fname = $_SESSION['firstname'];
+    $lname = $_SESSION['lastname'];
+
+    $full_name = $fname . " " . $lname;
+?>
 
 <?php 
     //getting the session id
@@ -38,15 +47,17 @@
             $item_title = $row['product_title'];
             $item_image = $row['product_image'];
             $item_price = $row['product_price'];
+            $promo_price = $row['promo_price'];
             
-        }
+		}
+		
 
         if (!$item_search_query) {
             die("QUERY FAILED" . mysqli_error($db));
         }
 
          //adding the item to cart if it doesn't already exist
-        $add_query = "INSERT INTO cart(client_id,item_id,item_title,item_image,item_price) VALUES ($client_id,$item_id,'$item_title','$item_image',$item_price)";
+        $add_query = "INSERT INTO cart(client_id,item_id,item_title,item_image,item_price,promo_price) VALUES ($client_id,$item_id,'$item_title','$item_image','$item_price','$promo_price')";
         $add_to_cart_query = mysqli_query($db,$add_query);
 
         if (!$add_to_cart_query) {
@@ -57,6 +68,7 @@
     }
     } 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -125,16 +137,21 @@
 						<?php 
                             
                             $cart_query = "SELECT * FROM cart WHERE client_id = $client_id";
-                            $cart_search_query = mysqli_query($db,$cart_query);
+							$cart_search_query = mysqli_query($db,$cart_query);
+							$total_final= 0;
                             while ($row = mysqli_fetch_array($cart_search_query)) {
                                 
                                 $cart_id = $row['item_id'];
                                 $item_title = $row['item_title'];
                                 $item_image = $row['item_image'];
                                 $item_price = $row['item_price'];
-                                $item_quantity = $row['item_quantity'];
+								$item_quantity = $row['item_quantity'];
+								$promo_price = $row['promo_price'];
+								if($promo_price > 0){
+									$item_price = $promo_price;
+								}
                                 $total = $item_price * $item_quantity;
-
+								$total_final=$total_final+$total;
                             
 
                             
@@ -147,7 +164,7 @@
 								</div>
 							</td>
 							<td class="column-2"><?php  echo $item_title ?></td>
-							<td class="column-3">$<?php echo $item_price ?></td>
+							<td class='column-3'>$<?php  echo $item_price ?></td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
 									<a href='cart.php?reduce=<?php echo $cart_id ?>&user=<?php echo $client_id?>' class=" color1 flex-c-m size7 bg8 eff2">										
@@ -226,12 +243,12 @@
 					</div>
 				</div>
 
-				<div class="size10 trans-0-4 m-t-10 m-b-10">
-					<!-- Button -->
+				<!-- <div class="size10 trans-0-4 m-t-10 m-b-10">
+					
 					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
 						Update Cart
 					</button>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- Total -->
@@ -247,7 +264,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						$<?php echo $total ?>
+						$<?php echo $total_final ?>
 					</span>
 				</div>
 
@@ -299,7 +316,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						$<?php echo $total ?>
+						$<?php echo $total_final?>
 					</span>
 				</div>
 
@@ -523,3 +540,11 @@
 
 </body>
 </html>
+<?php
+
+}
+else {
+    header("location:login.php");
+}
+
+?>

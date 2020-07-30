@@ -4,7 +4,7 @@
 
 
 <?php 
-                            $query = "SELECT * FROM products";
+                            $query = "SELECT * FROM products  WHERE product_archif = '0'" ;
                             $load_products_query = mysqli_query($db,$query);
 
                             if (!$load_products_query) {
@@ -27,16 +27,16 @@
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-								<img src="images/<?php echo $product_image ?>" alt="<?php echo $product_title ?>">
+								<img src="images/<?php echo $product_image ?>" alt="<?php echo $product_title ?> width='10' height='100'">
 
 								<div class="block2-overlay trans-0-4">
 									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
 										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 									</a>
-
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
+
 										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
 											Add to Cart
 										</button>
@@ -50,7 +50,11 @@
 								</a>
 
 								<span class="block2-price m-text6 p-r-5">
-									$<?php echo $product_price ?>
+									$<?php echo $product_desc ?>
+								</span>
+								<span class="block2-price m-text6 p-r-5">
+								<?php echo $product_price ?>>
+
 								</span>
 							</div>
 						</div>

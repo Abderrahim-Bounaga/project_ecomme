@@ -1,3 +1,5 @@
+<?php include "db.php" ?>
+
 <?php session_start(); ?>
 
 <!DOCTYPE html>
@@ -46,7 +48,7 @@
 	<section class="slide1">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1 item1-slick1" style="background-image: url(images/master-slide-02.jpg);">
+				<!-- <div class="item-slick1 item1-slick1" style="background-image: url(images/master-slide-02.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
 							Women Collection 2018
@@ -57,37 +59,61 @@
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
-							<!-- Button -->
+							
 							<a href="product.php" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
 								Shop Now
 							</a>
 						</div>
 					</div>
-				</div>
+				</div> -->
+				<?php 
+								global $db;
 
-				<div class="item-slick1 item2-slick1" style="background-image: url(images/master-slide-03.jpg);">
+								$get_cate = "SELECT * FROM slide";
+								$run_cate = mysqli_query($db, $get_cate);
+								while($row_cate=mysqli_fetch_array($run_cate)){
+									$id_slide = $row_cate['id_slide'];
+									$title_slide = $row_cate['title_slide'];
+									$image_slide = $row_cate['image_slide'];
+									$desc_slide = $row_cate['desc_slide'];
+							
+									?>
+
+				<div class="item-slick1 item2-slick1" style="background-image: url(admin/img/<?php echo $image_slide;?>);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
-							Women Collection 2018
+						<?php echo $title_slide;?>	
 						</span>
 
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
-							New arrivals
+						<?php echo $desc_slide;?>
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
 							<!-- Button -->
-							<a href="product.php" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-								Shop Now
-							</a>
+							
+									<?php echo"
+									
+										<a href='product.php?cat=$id_slide' class='flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4'>
+											show product					
+										</a>
+									
+									
+									";?>
+								 
+								
+							
 						</div>
 					</div>
 				</div>
+				<?php 
+				 }
+				 ?>
 
-				<div class="item-slick1 item3-slick1" style="background-image: url(images/master-slide-04.jpg);">
+				<!-- <div class="item-slick1 item3-slick1" style="background-image: url(images/master-slide-04.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
-							Women Collection 2018
+							kids Collection 2018
 						</span>
 
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="rotateInUpRight">
@@ -95,13 +121,13 @@
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
-							<!-- Button -->
+							
 							<a href="product.php" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
 								Shop Now
 							</a>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 		</div>
@@ -152,7 +178,7 @@
 
 					<!-- block1 -->
 					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="images/banner-07.jpg" alt="IMG-BENNER">
+						<img src="images/banner-07.jpeg" alt="IMG-BENNER">
 
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
@@ -219,13 +245,72 @@
 
 					
 						<!-- Block2 -->
-						<?php require_once 'add_product.php';?>
+						
+<?php 
+							$query = "SELECT * FROM products WHERE trend_product = 1";
+                            $load_products_query = mysqli_query($db,$query);
+
+                            if (!$load_products_query) {
+                                die("QUERY FAILED". mysqli_error($db));
+                            }
+
+                            while ($row = mysqli_fetch_array($load_products_query)) {
+                                $product_id = $row['product_id'];
+                                $product_title = $row['product_title'];
+                                $product_image = $row['product_image'];
+                                $product_desc = $row['product_desc'];
+                                $product_info = $row['product_info'];
+                                $product_date = $row['product_date'];
+                                $product_price = $row['product_price'];
+
+                                ?>
+
+
+<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+							<!-- Block2 -->
+	<div class="block2">
+		<div class="block2-img wrap-pic-w of-hidden pos-relative">
+			<img src="admin/img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>" width='90' height='360'>
+
+				<div class="block2-overlay trans-0-4">
+					<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+						<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+						<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+					</a>
+					
+
+                    <div class="block2-btn-addcart w-size1 trans-0-4">
+					<p class="flex-c-m size1 s-text1 trans-0-4"><?php echo $product_desc ?></p>
+                    <!-- Button -->
+                        <a href="cart.php?item=<?php echo $product_id ?>"><button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                            Add to Cart
+                        </button></a>
+                    </div>
+				</div>
+		</div>
+
+		<div class="block2-txt p-t-20">
+			<a href='product-detail.php?product_id=<?php echo $product_id?>' class="block2-name dis-block s-text3 p-b-5">
+                <?php echo $product_title ?>
+			</a>
+
+			<span class="block2-price m-text6 p-r-5">
+			$<?php echo $product_price ?>
+			</span>
+		</div>
+	</div>
+</div>
+                    
+                    
+<?php
+    }
+?>
 					
 				</div>
 			</div>
 
 		</div>
-	</section> -->
+	</section> 
 
 	<!-- Banner2 -->
 	<section class="banner2 bg5 p-t-55 p-b-55">
@@ -233,7 +318,7 @@
 			<div class="row">
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="hov-img-zoom pos-relative">
-						<img src="images/banner-08.jpg" alt="IMG-BANNER">
+						<img src="images/banner-08.JPG" alt="IMG-BANNER">
 
 						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
 							<span class="m-text9 p-t-45 fs-20-sm">
@@ -253,7 +338,7 @@
 
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
-						<img src="images/shop-item-09.jpg" alt="IMG-BANNER">
+						<img src="images/shop-item-09.JPG" alt="IMG-BANNER">
 
 						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
 							<div class="t-center">
@@ -320,7 +405,7 @@
 
 
 	<!-- Blog -->
-	<section class="blog bgwhite p-t-94 p-b-65">
+	<!-- <section class="blog bgwhite p-t-94 p-b-65">
 		<div class="container">
 			<div class="sec-title p-b-52">
 				<h3 class="m-text5 t-center">
@@ -330,7 +415,7 @@
 
 			<div class="row">
 				<div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-					<!-- Block3 -->
+					
 					<div class="block3">
 						<a href="blog-detail.php" class="block3-img dis-block hov-img-zoom">
 							<img src="images/blog-01.jpg" alt="IMG-BLOG">
@@ -354,7 +439,7 @@
 				</div>
 
 				<div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-					<!-- Block3 -->
+					
 					<div class="block3">
 						<a href="blog-detail.php" class="block3-img dis-block hov-img-zoom">
 							<img src="images/blog-02.jpg" alt="IMG-BLOG">
@@ -378,7 +463,7 @@
 				</div>
 
 				<div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-					<!-- Block3 -->
+					
 					<div class="block3">
 						<a href="blog-detail.php" class="block3-img dis-block hov-img-zoom">
 							<img src="images/blog-03.jpg" alt="IMG-BLOG">
@@ -402,7 +487,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<!-- Instagram -->
 	<section class="instagram p-t-20">
@@ -415,7 +500,7 @@
 		<div class="flex-w">
 			<!-- Block4 -->
 			<div class="block4 wrap-pic-w">
-				<img src="images/gallery-03.jpg" alt="IMG-INSTAGRAM">
+				<img src="images/gallery-03.JPG" alt="IMG-INSTAGRAM">
 
 				<a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -437,7 +522,7 @@
 
 			<!-- Block4 -->
 			<div class="block4 wrap-pic-w">
-				<img src="images/gallery-07.jpg" alt="IMG-INSTAGRAM">
+				<img src="images/gallery-07.JPG" alt="IMG-INSTAGRAM">
 
 				<a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -459,7 +544,7 @@
 
 			<!-- Block4 -->
 			<div class="block4 wrap-pic-w">
-				<img src="images/gallery-09.jpg" alt="IMG-INSTAGRAM">
+				<img src="images/gallery-09.JPG" alt="IMG-INSTAGRAM">
 
 				<a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -481,7 +566,7 @@
 
 			<!-- Block4 -->
 			<div class="block4 wrap-pic-w">
-				<img src="images/gallery-13.jpg" alt="IMG-INSTAGRAM">
+				<img src="images/gallery-13.JPG" alt="IMG-INSTAGRAM">
 
 				<a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -503,7 +588,7 @@
 
 			<!-- Block4 -->
 			<div class="block4 wrap-pic-w">
-				<img src="images/gallery-15.jpg" alt="IMG-INSTAGRAM">
+				<img src="images/gallery-15.JPG" alt="IMG-INSTAGRAM">
 
 				<a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -590,29 +675,27 @@
 				</h4>
 
 				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Men
-						</a>
-					</li>
+					
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Women
-						</a>
-					</li>
+					<?php 
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Dresses
-						</a>
-					</li>
+                           $get_cat = "SELECT * FROM categories";
+                           $run_cat = mysqli_query($db, $get_cat);
+                           while($row_cat= mysqli_fetch_array($run_cat)){
+                               $cat_id = $row_cat['Category_id'];
+                               $cat_title = $row_cat['Category_title'];
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Sunglasses
-						</a>
-					</li>
+                               echo "
+							  
+									<li class='p-b-9'>
+										<a  value=' $cat_id' href='product.php?cat=$cat_id'>
+										$cat_title 
+										</a>
+									</li>
+									
+                               ";
+                           }
+                          ?>
 				</ul>
 			</div>
 
@@ -650,33 +733,29 @@
 
 			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
 				<h4 class="s-text12 p-b-30">
-					Help
+				Sou_Category
 				</h4>
 
 				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Track Order
-						</a>
-					</li>
+				<?php 
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
+				$get_cat = "SELECT * FROM sou_Category";
+				$run_cat = mysqli_query($db, $get_cat);
+				while($row_cat= mysqli_fetch_array($run_cat)){
+					$sou_cat_id = $row_cat['Sou_Category_id'];
+					$sou_cat_title = $row_cat['Sou_Category_title'];
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Shipping
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							FAQs
-						</a>
-					</li>
+					echo "
+				
+						<li class='p-b-9'>
+							<a  value=' $sou_cat_id' href='#'>
+							$sou_cat_title 
+							</a>
+						</li>
+					
+					";
+				}
+				?>
 				</ul>
 			</div>
 

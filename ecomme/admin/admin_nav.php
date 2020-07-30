@@ -46,6 +46,37 @@
                             </li>
                             <li>
                                 <a href="add_product.php"><i class="fa fa-fw fa-plus"></i> Add Products</a>
+                            </li> 
+                            <li>
+                                <a href="archif_product.php"><i class="fa fa-fw fa-plus"></i> archif Products</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li  class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-eye"></i>Categroy <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="view_cat.php"><i class="fa fa-fw fa-eye"></i> View Cat</a>
+                            </li>
+                            <li>
+                                <a href="add_cat.php"><i class="fa fa-fw fa-plus"></i> Add Cat</a>
+                            </li> 
+                            <li>
+                                <a href="archif_cat.php"><i class="fa fa-fw fa-plus"></i> archif Cat</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li  class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-eye"></i>slide <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="view_slide.php"><i class="fa fa-fw fa-eye"></i> View slide</a>
+                            </li>
+                            <li>
+                                <a href="add_slide.php"><i class="fa fa-fw fa-plus"></i> Add slide</a>
+                            </li> 
+                            <li>
+                                <a href="archif_slide.php"><i class="fa fa-fw fa-plus"></i> archif slide</a>
                             </li>
                         </ul>
                     </li>

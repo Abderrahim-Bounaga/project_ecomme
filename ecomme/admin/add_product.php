@@ -76,7 +76,7 @@ if (isset($_POST['add_product'])) {
                            $get_cat = "SELECT * FROM categories";
                            $run_cat = mysqli_query($db, $get_cat);
                            while($row_cat= mysqli_fetch_array($run_cat)){
-                               $cat_id = $row_cat['Id'];
+                               $cat_id = $row_cat['Category_id'];
                                $cat_title = $row_cat['Category_title'];
 
                                echo "

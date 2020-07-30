@@ -247,7 +247,7 @@
 						<!-- Block2 -->
 						
 <?php 
-							$query = "SELECT * FROM products WHERE trend_product = 1";
+							$query = "SELECT * FROM products WHERE trend_product = 1 ";
                             $load_products_query = mysqli_query($db,$query);
 
                             if (!$load_products_query) {
@@ -311,6 +311,7 @@
 
 		</div>
 	</section> 
+
 
 	<!-- Banner2 -->
 	<section class="banner2 bg5 p-t-55 p-b-55">

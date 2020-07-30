@@ -155,7 +155,7 @@
 					<?php 
 
 						if (isset($_SESSION['id'])) {
-						$welcome = $_SESSION['welcome']; ?>
+						 ?>
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
 						<span class="header-icons-noti"><?php echo $contor ?></span> 
 					<?php

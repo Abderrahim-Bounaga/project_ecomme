@@ -160,7 +160,7 @@ if (isset($_SESSION['id'])) {
 						
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="images/<?php echo $item_image ?>" alt="<?php echo $item_title ?>">
+									<img src="admin/img/<?php echo $item_image ?>" alt="<?php echo $item_title ?>">
 								</div>
 							</td>
 							<td class="column-2"><?php  echo $item_title ?></td>

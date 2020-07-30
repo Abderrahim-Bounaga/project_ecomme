@@ -263,7 +263,7 @@
 																<!-- Block2 -->
 										<div class="block2">
 											<div class="block2-img wrap-pic-w of-hidden pos-relative">
-												<img src="images/<?php echo $product_image ?>" alt="<?php echo $product_image ?>" width='90' height='360'>
+												<img src="admin/img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>" width='90' height='360'>
 
 													<div class="block2-overlay trans-0-4">
 														<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -379,7 +379,7 @@
 																<!-- Block2 -->
 										<div class="block2">
 											<div class="block2-img wrap-pic-w of-hidden pos-relative">
-												<img src="images/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
+												<img src="admin/img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>"width='90' height='360'>
 
 													<div class="block2-overlay trans-0-4">
 														<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -452,7 +452,7 @@
 														<!-- Block2 -->
 								<div class="block2">
 									<div class="block2-img wrap-pic-w of-hidden pos-relative">
-										<img src="images/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
+										<img src="admin/img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>" width='90' height='360'>
 
 											<div class="block2-overlay trans-0-4">
 												<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">

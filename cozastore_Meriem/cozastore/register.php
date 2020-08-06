@@ -1,10 +1,10 @@
-<?php include('server.php') ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>About</title>
+    <title>Register</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -43,7 +43,7 @@
     <!-- Title page -->
     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
         <h2 class="ltext-105 cl0 txt-center">
-            About
+            Register
         </h2>
     </section>
 
@@ -55,7 +55,7 @@
                 <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-md w-full-md">
                     <form method="post" action="register.php">
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
-                            Log In
+                            Register
                         </h4>
 
                         <div class="bor8 m-b-30">
@@ -69,12 +69,12 @@
                         </div>
 
                         <div class="bor8 m-b-30">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="password_1"
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="password"
                                 placeholder="Your password" required>
                         </div>
 
                         <div class="bor8 m-b-30">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="password_2"
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="Cpassword"
                                 placeholder="Confirm your password" required>
                         </div>
 
@@ -141,3 +141,40 @@
 </body>
 
 </html>
+
+<?php 
+if(isset($_POST['reg_user'])){
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $Cpassword = $_POST['Cpassword'];
+    $user_ip = getIpUser();
+
+    if($password === $Cpassword){
+        $password = md5($password);// this will incrypt password
+        $date_creation_compte = date('Y-m-d H:i:s');
+        // print $password;
+        $insert_user = $db->prepare("INSERT INTO user (username, email, password, date_inscr, user_ip) VALUES ( '$username', '$email', '$password', '$date_creation_compte', ' $user_ip')");
+        $insert_user->execute();
+        $run_user = mysqli_query($db, $insert_user);
+        $sele_cart = "SELECT * FROM cart WHERE ip_add='$user_ip'";
+        $run_cart = mysqli_query($db, $sele_cart);
+        $check_cart = mysqli_num_rows($run_cart);
+            if($check_cart){
+                $_SESSION['username'] = $username;
+                echo " <script>alert('You Have Been Registered Successfully')</script>";
+                echo " <script>window.open('product.php','_self')</script>";
+            }else{
+                $_SESSION['username'] = $username;
+                echo " <script>alert('You Have Been Registered Successfully')</script>";
+                echo " <script>window.open('index.php','_self')</script>";
+            }
+
+    }else{
+        echo " <script>alert('Password and confirm password does not match')</script>";
+        echo " <script>window.open('register.php','_self')</script>";
+    }
+    
+}
+
+?>

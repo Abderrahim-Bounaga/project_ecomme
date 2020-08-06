@@ -2,7 +2,6 @@
 <?php include "db.php" ?>
 <?php
 session_start();
-
 include "admin_header.php"
  ?>
 

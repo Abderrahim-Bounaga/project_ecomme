@@ -138,6 +138,32 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#coupons"><i class="fa fa-fw fa-book"></i> Coupons <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="coupons" class="collapse">
+                            <li>
+                                <a href="view_coupon.php">View Coupons</a>
+                            </li>
+                            <li>
+                                <a href="add_coupon.php">Add Coupons</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#slide"><i class="fa fa-fw fa-gear"></i> slide <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="slide" class="collapse">
+                            <li>
+                                <a href="view_slide.php">View Slide</a>
+                            </li>
+                            <li>
+                                <a href="add_slide.php">Add Slide</a>
+                            </li>
+                            <li>
+                                <a href="archif_slide.php">Archive Slide</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="add_admin.php"><i class="fa fa-fw fa-user"></i> Add admin profile</a>
                     </li>
                     <li>

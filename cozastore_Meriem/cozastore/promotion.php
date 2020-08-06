@@ -60,21 +60,24 @@
 						}
 
 							$start_from = ($page-1) * $per_page;
-							$get_products = "SELECT * FROM products WHERE product_archive = '0' ORDER BY 1 DESC LIMIT $start_from,$per_page";
-							$run_products = mysqli_query($db,$get_products);
+                            $get_products = "SELECT * FROM products WHERE product_archive = '0' AND promotion = '1' ORDER BY 1 DESC LIMIT $start_from,$per_page";
+                            
+                            $run_products = mysqli_query($db,$get_products);
 							
 							while($row_products=mysqli_fetch_array($run_products)){
 								$products_id = $row_products['product_id'];
 								$products_title = $row_products['product_title'];
 								$products_price = $row_products['product_price'];
-								$products_img1 = $row_products['product_img1'];
+                                $products_img1 = $row_products['product_img1'];
+                                $promotion = $row_products['promotion'];
+                                $promo_price = $row_products['promo_price'];
 						
 								echo " 
 								<div  class='col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women'>
 									<div class='block2'>
 										<div class='block2-pic hov-img0'>
 											<a href='product-detail.php?products_id=$products_id'>
-													<img class='img-responsive' src='images/$products_img1'>
+													<img class='img-responsive' src='images/$products_img1' >
 											</a>
 											<a href='product-detail.php?products_id=$products_id' class='block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04'>
 											View Details
@@ -84,11 +87,10 @@
 											<div class='block2-txt-child1 flex-col-l '>
 												<a href='product-detail.php?products_id=$products_id' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>
 												$products_title
-												</a>
-						
-												<span class='stext-105 cl3'>
-												$products_price DH
-												</span>
+                                                </a>
+                                                
+                                                <p class='card-text'><strong class='text-danger'>$promo_price DH</strong>  <del>$products_price DH</del></p>
+					
 											</div>
 										</div>
 										<div class='block2-txt-child1 flex-col-l p-lr-90'>
@@ -115,28 +117,28 @@
 						<ul class="pagination">
 						<?php 
 
-						$view_products = "SELECT * FROM products";
+						$view_products = "SELECT * FROM products WHERE product_archive = '0' AND promotion = '1'";
 						$result = mysqli_query($db,$view_products);
 						$total_records = mysqli_num_rows($result);
 						$total_page = ceil($total_records /$per_page);
 
 						echo"
 							<li class='page-item'>
-								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='product.php?page=1'>".'First page'."</a>
+								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='promotion.php?page=1'>".'First page'."</a>
 							</li>
 						";
 
 						for ($i=1; $i < $total_page; $i++) { 
 						echo"
 							<li class='page-item'>
-								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='product.php?page=".$i."'>".$i."</a>
+								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='promotion.php?page=".$i."'>".$i."</a>
 							</li>
 						";
 
 						}
 						echo"
 							<li class='page-item'>
-								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='product.php?page=$total_page'>".'Last page'."</a>
+								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='promotion.php?page=$total_page'>".'Last page'."</a>
 							</li>
 						";
 
@@ -149,9 +151,115 @@
 				</div>
 
 				<?php
-				getcategoreis(); 
-				getProductCategoreis(); 
+
+				if(isset($_GET['cat'])){
+                    $cat_id = $_GET['cat'];
+                    $get_cat = "SELECT * FROM categories WHERE cat_id='$cat_id'";
+                    $run_cat = mysqli_query($db, $get_cat);
+                    $row_cat =mysqli_fetch_array($run_cat);
+                    
+                    $get_products = "SELECT * FROM products WHERE cat_id='$cat_id'  AND product_archive = '0' AND promotion = '1' LIMIT 0,6";
+                    $run_products = mysqli_query($db, $get_products);
+                    $count = mysqli_num_rows($run_products);
+            
+                    while($row_products=mysqli_fetch_array($run_products)){
+                        $products_id = $row_products['product_id'];
+                        $products_title = $row_products['product_title'];
+                        $products_price = $row_products['product_price'];
+                        $products_img1 = $row_products['product_img1'];
+                        $promotion = $row_products['promotion'];
+                        $promo_price = $row_products['promo_price'];
+            
+                        echo " 
+                        <div  class='col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item center-responsive' >
+                            <div class='block2' >
+                                <div class='block2-pic hov-img0'>
+                                    <a href='product-detail.php?products_id=$products_id'>
+                                            <img class='img-responsive' src='images/$products_img1'>
+                                    </a>
+                                    <a href='product-detail.php?products_id=$products_id' class='block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04'>
+                                    View Details
+                                    </a> 
+                                </div>
+                                <div class='block2-txt flex-w flex-t p-t-14'>
+                                    <div class='block2-txt-child1 flex-col-l '>
+                                        <a href='product-detail.php?products_id=$products_id' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>
+                                        $products_title
+                                        </a>
+                
+                                        <p class='card-text'><strong class='text-danger'>$promo_price DH</strong>  <del>$products_price DH</del></p>
+            
+                                    </div>
+                                </div>
+                                <div class='block2-txt-child1 flex-col-l p-lr-90'>
+                               
+                                <a href='shoping-cart.php?products_id=$products_id' class=' flex-c-m stext-103 cl5 size-102 bg2 bor1 hov-btn1 p-lr-15 trans-04 '>
+                                Add To Cart
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        ";
+                    }
+            
+                } 
+				 
 				?>
+                <?php 
+                if(isset($_GET['p_cat'])){
+                    $p_cat_id = $_GET['p_cat'];
+                    $get_p_cat = "SELECT * FROM product_categories WHERE p_cat_id= '$p_cat_id'";
+                    $run_p_cat = mysqli_query($db, $get_p_cat);
+                    $row_p_cat =mysqli_fetch_array($run_p_cat);
+                    
+                    $get_products = "SELECT * FROM products WHERE p_cat_id= '$p_cat_id' AND product_archive = '0'  AND promotion = '1'";
+                    $run_products = mysqli_query($db, $get_products);
+                    $count = mysqli_num_rows($run_products);
+            
+                    while($row_products=mysqli_fetch_array($run_products)){
+                        $products_id = $row_products['product_id'];
+                        $products_title = $row_products['product_title'];
+                        $products_price = $row_products['product_price'];
+                        $products_img1 = $row_products['product_img1'];
+                        $promotion = $row_products['promotion'];
+                        $promo_price = $row_products['promo_price'];
+            
+                        echo " 
+                        <div  class='col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item center-responsive' >
+                            <div class='block2' >
+                                <div class='block2-pic hov-img0'>
+                                    <a href='product-detail.php?products_id=$products_id'>
+                                            <img class='img-responsive' src='images/$products_img1'>
+                                    </a>
+                                    <a href='product-detail.php?products_id=$products_id' class='block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04'>
+                                    View Details
+                                    </a> 
+                                </div>
+                                <div class='block2-txt flex-w flex-t p-t-14'>
+                                    <div class='block2-txt-child1 flex-col-l '>
+                                        <a href='product-detail.php?products_id=$products_id' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>
+                                        $products_title
+                                        </a>
+                
+                                        <p class='card-text'><strong class='text-danger'>$promo_price DH</strong>  <del>$products_price DH</del></p>
+                                        
+                                    </div>
+                                </div>
+                                <div class='block2-txt-child1 flex-col-l p-lr-90'>
+                               
+                                <a href='product-detail.php?products_id=$products_id' class=' flex-c-m stext-103 cl5 size-102 bg2 bor1 hov-btn1 p-lr-15 trans-04 '>
+                                Add To Cart
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        ";
+                    }
+            
+                }
+                ?>
 			</div>
 		</div>
 	</div>

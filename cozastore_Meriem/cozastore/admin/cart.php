@@ -1,5 +1,4 @@
 <?php include "admin_header.php" ?>
-<?php session_start(); ?>
 
 <?php 
     //getting the session id

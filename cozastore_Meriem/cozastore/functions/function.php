@@ -45,7 +45,7 @@ function add_cart(){
 function addProduct(){
     global $db;
 
-    $get_products = "SELECT * FROM products ORDER BY 1 DESC LIMIT 0,8";
+    $get_products = "SELECT * FROM products WHERE product_archive = '0' ORDER BY 1 DESC LIMIT 0,8";
     $run_products = mysqli_query($db, $get_products);
     while($row_products=mysqli_fetch_array($run_products)){
         $products_id = $row_products['product_id'];
@@ -172,7 +172,7 @@ function getProductCategoreis(){
         $run_p_cat = mysqli_query($db, $get_p_cat);
         $row_p_cat =mysqli_fetch_array($run_p_cat);
         
-        $get_products = "SELECT * FROM products WHERE p_cat_id= '$p_cat_id'";
+        $get_products = "SELECT * FROM products WHERE p_cat_id= '$p_cat_id' AND product_archive = '0'";
         $run_products = mysqli_query($db, $get_products);
         $count = mysqli_num_rows($run_products);
 
@@ -202,6 +202,7 @@ function getProductCategoreis(){
                             <span class='stext-105 cl3'>
                             $products_price DH
                             </span>
+
                         </div>
                     </div>
                     <div class='block2-txt-child1 flex-col-l p-lr-90'>
@@ -234,7 +235,7 @@ function getcategoreis(){
         $run_cat = mysqli_query($db, $get_cat);
         $row_cat =mysqli_fetch_array($run_cat);
         
-        $get_products = "SELECT * FROM products WHERE cat_id='$cat_id' LIMIT 0,6";
+        $get_products = "SELECT * FROM products WHERE cat_id='$cat_id'  AND product_archive = '0' LIMIT 0,6";
         $run_products = mysqli_query($db, $get_products);
         $count = mysqli_num_rows($run_products);
 
@@ -261,9 +262,10 @@ function getcategoreis(){
                             $products_title
                             </a>
     
-                            <span class='stext-105 cl3'>
+                            <span class=' stext-105 cl3'>
                             $products_price DH
                             </span>
+
                         </div>
                     </div>
                     <div class='block2-txt-child1 flex-col-l p-lr-90'>

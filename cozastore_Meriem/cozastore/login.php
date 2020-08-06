@@ -1,10 +1,11 @@
-<?php include('server.php') ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>About</title>
+    <title>Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -42,7 +43,7 @@
     <!-- Title page -->
     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
         <h2 class="ltext-105 cl0 txt-center">
-            About
+            Login
         </h2>
     </section>
 

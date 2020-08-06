@@ -1,6 +1,6 @@
 
 <?php
- session_start();
+session_start();
  include "admin_header.php"
  ?>
 
@@ -14,6 +14,8 @@ if (isset($_POST['add_product'])) {
     $product_price = $_POST['product_price'];
     $product_info = $_POST['product_info'];
     $product_desc = $_POST['product_desc'];
+    $promotion = $_POST['promotion'];
+    $promo_price = $_POST['promo_price'];
    
     $product_img1 = $_FILES['product_img1']['name'];
     $product_img2 = $_FILES['product_img2']['name'];
@@ -26,7 +28,7 @@ if (isset($_POST['add_product'])) {
     move_uploaded_file($temp_name2, "../images/$product_img2");
     move_uploaded_file($temp_name3, "../images/$product_img3");
 
-    $add_product = "INSERT INTO products (p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_info,product_desc) VALUES ('$product_cat','$categories',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_info','$product_desc')";
+    $add_product = "INSERT INTO products (p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_info,product_desc,promotion,promo_price) VALUES ('$product_cat','$categories',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_info','$product_desc','$promotion','$promo_price')";
     $add_product_query = mysqli_query($db,$add_product);
 
     if($add_product_query){
@@ -131,6 +133,23 @@ if (isset($_POST['add_product'])) {
                     <div class="form-group">
                         <label for="product_price">Product Price</label>
                         <input type="number" class="form-control" name="product_price">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Promotion</label>
+                        <select name="promotion" class="form-control" >
+                        
+                        <option value=0> non </option>
+                        <option value=1 >oui </option>
+                          
+                          
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product_price">Promotion Price</label>
+                        <input type="number" class="form-control" name="promo_price">
                     </div>
 
                     <div class="form-group">

@@ -1,18 +1,29 @@
+<?php session_start(); ?>
+<?php include "db.php" ?>
+<?php include "functions/function.php"?>
 
-
-<header class="header-v4">
+    <header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
+                        <a href="#" class="btn btn-success btn-sm" >
+                        <?php 
+                        if(!isset($_SESSION['username'])){
+                            echo "Welcome";
+                        }else{
+                            echo "Welcome: ".$_SESSION['username'].""; 
+                        }
+                        ?>
+                        </a>
 						Free shipping for standard order over $100
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
+						<a href="register.php" class="flex-c-m trans-04 p-lr-25">
+							Register
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
@@ -20,11 +31,17 @@
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
+							FR
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
+						<a href="login.php" >
+                        <?php 
+                        if(!isset($_SESSION['username'])){
+                            echo "<a class='flex-c-m trans-04 p-lr-25' href='login.php'> Login </a>";
+                        }else{
+                            echo "<a class='flex-c-m trans-04 p-lr-25' href='logout.php'> Logout </a>"; 
+                        }
+                        ?>
 						</a>
 					</div>
 				</div>
@@ -45,8 +62,12 @@
 								<a href="index.php">Home</a>
 							</li>
 
-							<li class="active-menu">
+							<li>
 								<a href="product.php">Shop</a>
+							</li>
+
+                            <li>
+								<a href="promotion.php"> Promotion</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
@@ -102,7 +123,7 @@
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php items(); ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -125,14 +146,23 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
+                    <a href="#" class="btn btn-success btn-sm" >
+                        <?php 
+                        if(!isset($_SESSION['username'])){
+                            echo "Welcome";
+                        }else{
+                            echo "Welcome: ".$_SESSION['username'].""; 
+                        }
+                        ?>
+                        </a>
 						Free shipping for standard order over $100
 					</div>
 				</li>
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
+                    <a href="register.php" class="flex-c-m trans-04 p-lr-25">
+							Register
 						</a>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
@@ -143,8 +173,14 @@
 							EN
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
+						<a href="login.php" >
+                        <?php 
+                        if(!isset($_SESSION['username'])){
+                            echo "<a class='flex-c-m trans-04 p-lr-25' href='login.php'> Login </a>";
+                        }else{
+                            echo "<a class='flex-c-m trans-04 p-lr-25' href='logout.php'> Logout </a>"; 
+                        }
+                        ?>
 						</a>
 					</div>
 				</li>
@@ -157,6 +193,10 @@
 
 				<li>
 					<a href="product.php">Shop</a>
+				</li>
+
+                <li>
+					<a href="promotion.php"> Promotion</a>
 				</li>
 
 				<li>

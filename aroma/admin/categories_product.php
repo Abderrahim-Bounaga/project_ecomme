@@ -35,15 +35,15 @@ if (isset($_POST['add_sou_categories'])) {
     $categories = $_POST['categories'];
     
    
-    $sou_categories_img = $_FILES['sou_categories_img']['name'];
+    $sou_categories_img = $_FILES['Scategories_img']['name'];
    
-    $temp_name1 = $_FILES['sou_categories_img']['tmp_name'];
+    $temp_name = $_FILES['Scategories_img']['tmp_name'];
 
 
-    move_uploaded_file($temp_name1, "../img/sou_categories/$sou_categories_img");
+    move_uploaded_file($temp_name, "../img/sou_categories/$sou_categories_img");
    
 
-    $add_product = "INSERT INTO sou_categories (Sou_Category_title,Id,sou_categories_img) VALUES ('$sou_categories_title','$categories','$sou_categories_img')";
+    $add_product = "INSERT INTO sou_category (Sou_Category_title,Id,sou_categories_img) VALUES ('$sou_categories_title','$categories','$sou_categories_img')";
     $add_product_query = mysqli_query($db,$add_product);
 
     if($add_product_query){
@@ -89,9 +89,11 @@ if (isset($_POST['add_sou_categories'])) {
                     </div>
                     </form>
 
+
                                     <!-- /. Ajoute categories -->
 
                                     <!-- Ajoute sou_categories -->
+
 
                     <div class="row">
                     <div class="col-lg-12">
@@ -102,15 +104,16 @@ if (isset($_POST['add_sou_categories'])) {
                     </div>
                 </div>
                     <div class="form-group">
-                    
+                   <form action="categories_product.php" method="post" >    
+
                     <div class="form-group">
                     <div class="form-group">
-                        <label for="title">Title categories </label>
+                        <label for="title">Title sou_categories </label>
                         <input type="text" class="form-control" name="sou_categories_title">
                     </div>
                     <div class="form-group">
-                        <label for="product_image">sou_categories Image </label>
-                        <input type="file"  name="sou_categories_img" class="form-control">
+                        <label for="sou_categories">sou_categories Image </label>
+                        <input type="file"  name="Scategories_img" class="form-control">
                     </div>
                 
                         <label for="title"> Select categories </label>
@@ -143,6 +146,7 @@ if (isset($_POST['add_sou_categories'])) {
                     <div class="form-group">
                 <input class="btn btn-primary" type="submit" name="add_sou_categories" value="Ajoute sou_categories ">
                     </div>
+                    </form>
 
                       <!-- /. Ajoute sou_categories -->
                     <div class="row">
@@ -152,11 +156,10 @@ if (isset($_POST['add_sou_categories'])) {
                         </h1>
                         
                     </div>
-                    </form>
+                   
 
                 </div>
                
-<?php include "db.php" ?>
 
 
 
@@ -174,6 +177,7 @@ function categories()
 	while($row = $result->fetch_assoc())
 	{
 		$categories[] = array(
+
 
 			'Id' => $row['Id'],
 			'Category_image' => $row['Category_image'],
@@ -214,7 +218,7 @@ function sub_categories($id)
 <?php
 function viewsubcat($categories)
 {
-	$html = '<ul> ';
+	$html = '<ul  class="Sou_Categor"> ';
 
 
 	if (is_array($categories) || is_object($categories))

@@ -29,15 +29,10 @@ $contor = $data['total'];
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
               <li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
               <li class="nav-item active"><a class="nav-link" href="category.php">Shop</a></li>
+              <li class="nav-item active"><a class="nav-link" href="promo.php">Promotion</a></li>
+
              
-              <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Blog</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-blog.php">Blog Details</a></li>
-                </ul>
-							</li>
+              
 							
               <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
             </ul>

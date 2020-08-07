@@ -52,9 +52,10 @@ if (isset($_POST['add_product'])) {
      
      
                     <div class="form-group">
-                        <label for="title">Product Title</label>
+                        <label for="title">categories Title</label>
                         <input type="text" class="form-control" name="product_title">
                     </div>
+                    
                     <div class="form-group">
                         <label for="title"> Product categories </label>
                         <!-- <input type="text" class="form-control" name="product_title"> -->
@@ -150,6 +151,7 @@ if (isset($_POST['add_product'])) {
 
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" name="add_product" value="Add product">
+                        
                     </div>
 
 

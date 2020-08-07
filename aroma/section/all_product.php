@@ -3,7 +3,7 @@
             <div class="row">
 
             <?php 
-               $per_page = 5;
+               $per_page = 9;
               
                if(isset($_GET['page'])){
                 $page = $_GET['page'];
@@ -54,34 +54,58 @@
                             }
 
                             while ($row = mysqli_fetch_array($load_products_query)) {
-                                $product_id = $row['product_id'];
-                                $product_title = $row['product_title'];
-                                $product_image = $row['product_image'];
-                                $product_desc = $row['product_desc'];
-                                
-								$product_info = $row['product_info'];
-								$product_price = $row['product_price'];
-
+                              $product_id = $row['product_id'];
+                              $product_title = $row['product_title'];
+                              $product_price = $row['product_price']; 
+                              $product_image = $row['product_image']; 
+                              $product_desc = $row['product_desc'];
+  
+                            
+                              
+              $promo_product = $row['promo_product'];
+              $promo_pri = $promo_product *( $product_price/100);
+              $product_priceFinal = $product_price - $promo_pri ;
 								
                                 ?>
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                  <img src="img/product/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
-                    <ul class="card-product__imgOverlay">
-                      <li><button><a href = "single-product.php?item=<?php echo $product_id ?>"  data-dismiss="modal"><i class="ti-search"></i></a></button></li>
-                      <li><button> <a href = "cart.php?item=<?php echo $product_id ?>"  data-dismiss="modal"><i class="ti-shopping-cart"></a></i></button>
-                      </li>
-                      <li><button><i class="ti-heart"></i></button></li>
-                    </ul>
-                  </div>
-                  <div class="card-body">
-                    <p>Accessories</p>
-                    <h4 class="card-product__title"><a href="#"><?php echo $product_title ?></a></h4>
-                    <p class="card-product__price"><?php echo $product_price ?></p>
-                  </div>
-                </div>
-              </div>
+             <div class="block">
+
+<div class="top">
+  <ul>
+    <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+    <li><span class="converse"><a href = "single-product.php?item=<?php echo $product_id ?>"  data-dismiss="modal"><?php echo $product_title ?></a></span></li>
+    <li><a href = "cart.php?item=<?php echo $product_id ?>" ><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+  </ul>
+</div>
+
+<div class="middle">
+<a href = "single-product.php?item=<?php echo $product_id ?>"  data-dismiss="modal"> <img src="img/product/<?php echo $product_image ?>" alt="<?php echo $product_image ?>" > </a>
+</div>
+
+<div class="bottom">
+  <div class="heading"><?php echo $product_desc ?></div>
+  <div class="info"><?php echo $product_desc ?></div>
+
+  <?php
+        if ($promo_product > 0) {
+
+                        ?>
+
+  
+  <div class="price">$<?php echo $product_priceFinal ?> <span class="old-price">$<?php echo $product_price ?></span></div>
+  <?php
+       }else{ 
+                        ?>
+      <div class="price">$<?php echo $product_price ?> </div>
+
+
+<?php
+}
+                        ?>
+
+
+</div>
+
+</div>
               <?php
                             }
                         ?>

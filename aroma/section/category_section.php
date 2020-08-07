@@ -41,6 +41,8 @@ function sub_categories($id)
 	while($row = $result->fetch_assoc())
 	{
 		$categories[] = array(
+
+      'Id' => ($row['Id']),
 			
       'Sou_Category_title' => ($row['Sou_Category_title']),
       'Id_Sou_categories' => $row['Sou_Category_id'],
@@ -63,9 +65,10 @@ function viewsubcat($categories)
   foreach($categories as $category){
 
     $Sou_categoryId=$category['Id_Sou_categories'];
+    $categoryId=$category['Id'];
 
 
-	$html .= '<li>&nbsp &nbsp &nbsp &nbsp<a href="category.php?sub_ctgry='. $Sou_categoryId.'">'.$category['Sou_Category_title'].'</a></li>';
+	$html .= '<li  id="list-home" role="tabpanel" aria-labelledby="'.$categoryId.'">&nbsp &nbsp &nbsp &nbsp<a href="category.php?sub_ctgry='. $Sou_categoryId.'">'.$category['Sou_Category_title'].'</a></li>';
 	
 	
 }
@@ -77,18 +80,21 @@ function viewsubcat($categories)
 	return $html;
 }
 ?>
+<?php
+if (isset($_POST['submit'])) {
 
 
+}?>
 
 <section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5">
           <div class="sidebar-categories">
-            <div class="head">Browse Categories</div>
+            <div class="head" >Browse Categories</div>
             <ul class="main-categories">
               <li class="common-filter">
-                <form action="category_section.php"  method="post">
+                <form action="category_section.php"  method="post"  >
 
                 <?php $categories = categories(); ?>
 
@@ -101,7 +107,7 @@ $categoryId=$category['Id_categories'];
   
 	?>
 
-<ul><li  ><a href="category.php?item_ctgry=<?php echo $categoryId ?>"><?php echo $category['Category_title'] ?></a></li> 
+<ul><li  ><a   href="category.php?item_ctgry=<?php echo $categoryId ?>" class=" list-group-item-action active" id="<?php echo $categoryId ?>-list" ><?php echo $category['Category_title'] ?></a></li> 
                            
                                	<?php 
 			if( ! empty($category['Id'])){

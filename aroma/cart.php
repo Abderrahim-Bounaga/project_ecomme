@@ -123,7 +123,7 @@ if (isset($_SESSION['id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aroma Shop - Cart</title>
+  <title>beauty_store - Cart</title>
 	<link rel="icon" href="img/Fevicon.png" type="image/png">
   <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
@@ -163,6 +163,8 @@ if (isset($_SESSION['id'])) {
   
 
   <!--================Cart Area =================-->
+
+
   <section class="cart_area">
       <div class="container">
           <div class="cart_inner">
@@ -217,7 +219,7 @@ if (isset($_SESSION['id'])) {
 											<i class="fs-12 fa fa-minus" aria-hidden="true" name="reduce"></i>									
 									</a>
 
-									<input class="size8 m-text18 t-center num-product" type="number" id="num-product1" name="num-product1" value="<?php echo $item_quantity ?>">
+									<input class="size8 m-text18 t-center num-product" type="number" id="num-product1"   name="num-product1" value="<?php echo $item_quantity ?>">
 
 									<a href='cart.php?add=<?php echo $cart_id?>&user=<?php echo $client_id ?>' class=" color1 flex-c-m size7 bg8 eff2">
 										<i class="fs-12 fa fa-plus" aria-hidden="true" name="add"></i>
@@ -239,6 +241,7 @@ if (isset($_SESSION['id'])) {
                           
 
 
+<form action="cart.php" method="post" >    
 
 
                           <tr class="bottom_button">
@@ -253,8 +256,8 @@ if (isset($_SESSION['id'])) {
                               </td>
                               <td>
                                   <div class="cupon_text d-flex align-items-center">
-                                      <input type="text" placeholder="Coupon Code">
-                                      <a class="primary-btn" href="#">Apply</a>
+                                      <input type="text" name="code" placeholder="Coupon Code" >
+                                      <button type="submit" class="primary-btn" href="#"   name="apply_coupon">Apply</button>
                                       <a class="button" href="#">Have a Coupon?</a>
                                   </div>
                               </td>
@@ -329,8 +332,65 @@ if (isset($_SESSION['id'])) {
               </div>
           </div>
       </div>
+      </form>
   </section>
   <!--================End Cart Area =================-->
+
+
+  <?php 
+	if(isset($_POST['apply_coupon'])){
+		$code = $_POST['code'];
+		if($code == ""){
+
+		}else{
+			$get_coupons = "SELECT * FROM coupons WHERE coupon_code ='$code'";
+			$run_coupons = mysqli_query($connection, $get_coupons);
+			$check_coupons = mysqli_num_rows($run_coupons);
+			if($check_coupons = "1"){
+				$row_coupons = mysqli_fetch_array($run_coupons);
+				$coupon_pro_id = $row_coupons['product_id'];
+				$coupon_price = $row_coupons['coupon_price'];
+				$coupon_limit = $row_coupons['coupon_limit'];
+                $coupon_used = $row_coupons['coupon_used'];
+                
+
+				if($coupon_limit == $coupon_used){
+				    echo " <script>alert('Your Coupon Already Expired')</script>";	
+				}else{
+					$get_cart = "SELECT * FROM cart WHERE item_id='$coupon_pro_id' AND client_id ='$client_id'";
+					$run_cart = mysqli_query($connection, $get_cart);
+					$check_cart = mysqli_num_rows($run_cart);
+
+					if($check_cart = "1"){
+                        $get_priceP = "SELECT * FROM cart WHERE item_id ='$coupon_pro_id'";
+                        $run_get_priceP = mysqli_query($connection, $get_priceP);
+                        $row_price = mysqli_fetch_array($run_get_priceP);
+                        $product_price = $row_price['item_price'];
+
+
+                        $pro_c_pri = $coupon_price *( $product_price/100);
+                        $product_priceF = $product_price - $pro_c_pri ;
+
+
+
+
+						$add_used = "UPDATE coupons SET coupon_used=coupon_used+1 WHERE coupon_code ='$code'";
+						$run_used = mysqli_query($connection, $add_used);
+						$update_cart = "UPDATE cart SET item_price='$product_priceF' WHERE item_id='$coupon_pro_id' AND client_id ='$client_id'";
+						$run_update_cart = mysqli_query($connection, $update_cart);
+						echo " <script>alert('Your Coupon Has Been Applied')</script>";
+						echo " <script>window.open('cart.php','_self')</script>";
+					}else{
+						echo " <script>alert('Your Coupon Didnt Match With your Product in your cart )</script>";
+					}
+				}
+			}else{
+				echo " <script>alert('Your Coupon is Not Valid')</script>";
+			}
+		}
+	}
+	
+	?>
 
 
 

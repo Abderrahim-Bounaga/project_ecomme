@@ -9,7 +9,7 @@ if (isset($_POST['add_product'])) {
     $product_info = $_POST['product_info'];
     $product_price = $_POST['product_price'];
 
-    move_uploaded_file($product_image_temp, "../img/$product_image");
+    move_uploaded_file($product_image_temp, "../img/product/$product_image");
 
     $product_title = mysqli_real_escape_string($db,$product_title);
     $product_image = mysqli_real_escape_string($db,$product_image);

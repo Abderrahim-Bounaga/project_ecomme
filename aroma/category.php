@@ -11,7 +11,7 @@ session_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aroma Shop - Category</title>
+  <title>beauty_store - Category</title>
 	<link rel="icon" href="img/Fevicon.png" type="image/png">
   <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
@@ -22,6 +22,9 @@ session_start();
   <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
   <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
 
+  <link rel="stylesheet" href="css/top_list.css">
+
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -31,8 +34,8 @@ session_start();
 	<!--================ End Header Menu Area =================-->
 
 	<!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
+	<section class="blog-banner-area" id="category" style= ' '>
+		<div class="container h-100" >
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>Shop Category</h1>
@@ -81,5 +84,15 @@ session_start();
   <script src="vendors/jquery.ajaxchimp.min.js"></script>
   <script src="vendors/mail-script.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+
+<script>
+
+$('#myList a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>
 </body>
 </html>

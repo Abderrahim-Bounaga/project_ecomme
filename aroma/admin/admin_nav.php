@@ -55,6 +55,25 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#coupons"><i class="fa fa-fw fa-book"></i> Coupons <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="coupons" class="collapse">
+                            <li>
+                                <a href="view_coupon.php">View products Coupons</a>
+                            </li>
+                            <li>
+                                <a href="view_ctgry_coupon.php">View categories Coupons</a>
+                            </li>
+                            <li>
+                                <a href="add_coupon.php">Add product Coupons</a>
+                            </li>
+                            <li>
+                                <a href="add_coupon_ctgr.php">Add catigory Coupons</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
                     
                     <li>
                         <a href="cart.php"><i class="fa fa-fw fa-table"></i> Cart</a>

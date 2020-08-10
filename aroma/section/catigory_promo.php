@@ -37,7 +37,7 @@
             </div>
             <div class="card-body">
               
-              <h4 class="card-product__title"><a href="single-product.html"><?php echo $Category_title ?></a></h4>
+              <h4 class="card-product__title"><a href = "category.php?item_ctgry=<?php echo $Category_id ?>"  data-dismiss="modal"><?php echo $Category_title ?></a></h4>
               <p class="card-product__price">% <?php echo $promo_categorie ?></p>
             </div>
           </div>

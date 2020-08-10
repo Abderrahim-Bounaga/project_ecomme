@@ -345,23 +345,47 @@ if (isset($_SESSION['id'])) {
 		}else{
 			$get_coupons = "SELECT * FROM coupons WHERE coupon_code ='$code'";
 			$run_coupons = mysqli_query($connection, $get_coupons);
-			$check_coupons = mysqli_num_rows($run_coupons);
+            $check_coupons = mysqli_num_rows($run_coupons);
+            
+
 			if($check_coupons = "1"){
 				$row_coupons = mysqli_fetch_array($run_coupons);
 				$coupon_pro_id = $row_coupons['product_id'];
 				$coupon_price = $row_coupons['coupon_price'];
 				$coupon_limit = $row_coupons['coupon_limit'];
                 $coupon_used = $row_coupons['coupon_used'];
+                $coupon_type  = $row_coupons['coupon_type'];
+
                 
 
 				if($coupon_limit == $coupon_used){
 				    echo " <script>alert('Your Coupon Already Expired')</script>";	
 				}else{
-					$get_cart = "SELECT * FROM cart WHERE item_id='$coupon_pro_id' AND client_id ='$client_id'";
-					$run_cart = mysqli_query($connection, $get_cart);
-					$check_cart = mysqli_num_rows($run_cart);
+                   
+
+
+
+
+                   
+
+					
+                    if($coupon_type == "0"){
+                        $get_cart = "SELECT * FROM cart WHERE item_id='$coupon_pro_id' AND client_id ='$client_id'";
+                        $run_cart = mysqli_query($connection, $get_cart);
+                        $check_cart = mysqli_num_rows($run_cart);
+
+
 
 					if($check_cart = "1"){
+
+                        
+                        
+
+                        
+                           
+
+
+
                         $get_priceP = "SELECT * FROM cart WHERE item_id ='$coupon_pro_id'";
                         $run_get_priceP = mysqli_query($connection, $get_priceP);
                         $row_price = mysqli_fetch_array($run_get_priceP);
@@ -380,10 +404,68 @@ if (isset($_SESSION['id'])) {
 						$run_update_cart = mysqli_query($connection, $update_cart);
 						echo " <script>alert('Your Coupon Has Been Applied')</script>";
 						echo " <script>window.open('cart.php','_self')</script>";
-					}else{
+                    
+                      }
+
+                    }
+                    
+                    if($coupon_type = 1){
+
+
+                        $get_cart =" SELECT * FROM cart LEFT JOIN products ON cart.item_id  = products.product_id   WHERE product_CategoryId ='$coupon_pro_id' AND client_id ='$client_id'";
+                        $run_cart = mysqli_query($connection, $get_cart);
+                        $check_cart = mysqli_num_rows($run_cart);
+
+
+
+					 if($check_cart = "1"){
+                         
+                        $get_priceP = "SELECT * FROM cart LEFT JOIN products ON cart.item_id  = products.product_id   WHERE product_CategoryId ='$coupon_pro_id'";
+                        $run_get_priceP = mysqli_query($connection, $get_priceP);
+
+
+                        while ($row_price = mysqli_fetch_array($run_get_priceP)) {
+                            $product_price = $row_price['item_price'];
+                            $ctg_pro_id = $row_price['item_id'];
+
+
+                        $pro_c_pri = $coupon_price *( $product_price/100);
+                        $product_priceF = $product_price - $pro_c_pri ;
+
+
+
+
+						
+						$update_cart = "UPDATE cart SET item_price='$product_priceF' WHERE item_id='$ctg_pro_id' AND client_id ='$client_id'";
+						$run_update_cart = mysqli_query($connection, $update_cart);
+                        
+                    }
+
+                    $add_used = "UPDATE coupons SET coupon_used=coupon_used+1 WHERE coupon_code ='$code'";
+						$run_used = mysqli_query($connection, $add_used);
+                    echo " <script>alert('Your Coupon catigory Has Been Applied')</script>";
+                        echo " <script>window.open('cart.php','_self')</script>";
+
+                      }
+                    
+                    
+                    }
+                    
+                    
+                    
+                    
+                    else{
 						echo " <script>alert('Your Coupon Didnt Match With your Product in your cart )</script>";
-					}
-				}
+                     }
+                    
+
+
+
+                  
+                }
+                
+
+                
 			}else{
 				echo " <script>alert('Your Coupon is Not Valid')</script>";
 			}

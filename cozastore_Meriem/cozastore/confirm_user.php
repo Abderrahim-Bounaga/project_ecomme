@@ -1,4 +1,7 @@
-<?php session_start() ?>
+<?php session_start()
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,124 +44,151 @@
 	<!-- Header -->
 	<?php include "includes/store_nav2.php"?>
 
-	
-	<!-- Product -->
-	<div class="bg0 m-t-23 p-b-140">
-		<div class="container">
-		    <?php include "side_bar.php"?>
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop  p-tb-30">
+<div class="container">
+	<h2 class="title-page">My account</h2>
+</div> <!-- container //  -->
 
-			<div class="row isotope-grid">
-				
-				<?php 
-				
-				if(!isset($_GET['cat'])){
-					if(!isset($_GET['p_cat'])){
-						$per_page = 8;
-						if(isset($_GET['page'])){
-							$page = $_GET['page'];
-						}else{
-							$page = 1;
-						}
+</section>
+<!-- ========================= SECTION PAGETOP END// ========================= -->
 
-							$start_from = ($page-1) * $per_page;
-							$get_products = "SELECT * FROM products WHERE product_archive = '0' ORDER BY 1 DESC LIMIT $start_from,$per_page";
-							$run_products = mysqli_query($db,$get_products);
-							
-							while($row_products=mysqli_fetch_array($run_products)){
-								$products_id = $row_products['product_id'];
-								$products_title = $row_products['product_title'];
-								$products_price = $row_products['product_price'];
-								$products_img1 = $row_products['product_img1'];
-						
-								echo " 
-								<div  class='col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women'>
-									<div class='block2'>
-										<div class='block2-pic hov-img0'>
-											<a href='product-detail.php?products_id=$products_id'>
-													<img class='img-responsive' src='images/$products_img1'>
-											</a>
-											<a href='product-detail.php?products_id=$products_id' class='block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04'>
-											View Details
-											</a>
-										</div>
-										<div class='block2-txt flex-w flex-t p-t-14'>
-											<div class='block2-txt-child1 flex-col-l '>
-												<a href='product-detail.php?products_id=$products_id' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>
-												$products_title
-												</a>
-						
-												<span class='stext-105 cl3'>
-												$products_price DH
-												</span>
-											</div>
-										</div>
-										<div class='block2-txt-child1 flex-col-l p-lr-90'>
-									   
-										<a href='product-detail.php?products_id=$products_id' class=' flex-c-m stext-103 cl5 size-102 bg2 bor1 hov-btn1 p-lr-15 trans-04 '>
-										Add To Cart
-										</a>
-										</div>
-									</div>
-								</div>
-								
-								";
-							}
-						
-				
-				
-				?>
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<div class="container">
 
-				</div>
-			
+<div class="row">
+	<aside class="col-md-3">
+    <?php include "profil_user.php"?>
+		<nav class="list-group">
+            <a class="list-group-item text-secondary stext-106 trans-04" href="account_user.php"> Account overview  </a>
+			<a class="list-group-item text-secondary stext-106 trans-04  " href="order_user.php"> My Orders </a>
+			<a class="list-group-item  stext-106 trans-04 cl5 bg2" href="confirm_user.php"> Confirm payment </a>
+			<a class="list-group-item text-secondary stext-106 trans-04 " href="edit_account.php"> Settings </a>
+            <a class="list-group-item text-secondary stext-106 trans-04" href="change_password.php"> Change password </a>
+			<a class="list-group-item text-secondary stext-106 trans-04" href="logout.php"> Log out </a>
+		</nav>
+	</aside> <!-- col.// -->
+	<main class="col-md-9">
+          <?php 
+           if(isset($_GET['order_id'])){
+    
+            $order_id = $_GET['order_id'];
+            
+        }
+          
+          ?>
+        <div class="card">
+            <div class="card-body">
+                <form class="row" action="confirm_user.php?update_id=<?php echo $order_id;  ?>" method="post" enctype="multipart/form-data">
+                    <div class="col-md-9">
+                        <h4 class="card-title">Please confirm your payment</h4>
+                        <br> 
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label>Invoice NO </label>
+                                <input type="text" class="form-control" value="123456789" name="invoice_no">
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label>Amount Sent</label>
+                                <input type="text" class="form-control" value="" name="amount_sent">
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row.// -->
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label>Select Payement Mode </label>
+                            <select id="inputState" class="form-control" name="payment_mode">
+                                <option> Choose...</option>
+                                <option>Back Code</option>
+                                <option>UBL / Omni Paisa</option>
+                                <option selected="">Easy Paisa</option>
+                                <option>Western Union</option>
+                            </select>
+                            </div> <!-- form-group end.// -->
+                            <div class="form-group col-md-6">
+                            <label>Transaction/ Reference ID</label>
+                            <input type="text" class="form-control" name="ref_no">
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row.// -->
 
-				<!-- Load more -->
-				<div class="flex-c-m flex-w w-full p-t-45">
-						<ul class="pagination">
-						<?php 
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label>Omni Paisa/ East Paisa</label>
+                            <input type="text" class="form-control" value="" name="code">
+                            </div> <!-- form-group end.// -->
+                            <div class="form-group col-md-6">
+                            <label>Payment Date</label>
+                            <input type="text" class="form-control" value="+2126456789" name="date">
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row.// -->
+                        <br>
+                        <button class="btn stext-101 cl0 size-115 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="confirm_payment">Confirm Payment</button>	
 
-						$view_products = "SELECT * FROM products";
-						$result = mysqli_query($db,$view_products);
-						$total_records = mysqli_num_rows($result);
-						$total_page = ceil($total_records /$per_page);
+                        <br><br>
 
-						echo"
-							<li class='page-item'>
-								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='product.php?page=1'>".'First page'."</a>
-							</li>
-						";
+                    </div> <!-- col.// -->
+                    
+                </form>
+                <?php 
+               
+                   
+                    if(isset($_POST['confirm_payment'])){
+                        
+                        $update_id = $_GET['update_id'];
+                        
+                        $invoice_no = $_POST['invoice_no'];
+                        
+                        $amount = $_POST['amount_sent'];
+                        
+                        $payment_mode = $_POST['payment_mode'];
+                        
+                        $ref_no = $_POST['ref_no'];
+                        
+                        $code = $_POST['code'];
+                        
+                        $payment_date = $_POST['date'];
+                        
+                        $complete = "Complete";
+                        
+                        $insert_payment = "INSERT INTO payments (invoice_no,amount,payment_mode,ref_no,code,payment_date) VALUES ('$invoice_no','$amount','$payment_mode','$ref_no','$code','$payment_date')";
+                        
+                        $run_payment = mysqli_query($db,$insert_payment);
+                        
+                        $update_customer_order = "UPDATE customer_orders SET order_status='$complete' WHERE order_id='$update_id'";
+                        
+                        $run_customer_order = mysqli_query($db,$update_customer_order);
+                        
+                        $update_pending_order = "UPDATE pending_orders SET order_status='$complete' WHERE order_id='$update_id'";
+                        
+                        $run_pending_order = mysqli_query($db,$update_pending_order);
+                        
+                        if($run_pending_order){
+                            
+                            echo "<script>alert('Thank You for purchasing, your orders will be completed within 24 hours work')</script>";
+                            
+                            echo "<script>window.open('order_user.php','_self')</script>";
+                            
+                        }
+                        
+                    }
+                   
+                   ?>
+                <br> 
+            </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
 
-						for ($i=1; $i < $total_page; $i++) { 
-						echo"
-							<li class='page-item'>
-								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='product.php?page=".$i."'>".$i."</a>
-							</li>
-						";
+        <br> <br> <br> <br> <br>
 
-						}
-						echo"
-							<li class='page-item'>
-								<a class='page-link cl5 bg2 hov-btn1 p-lr-15' href='product.php?page=$total_page'>".'Last page'."</a>
-							</li>
-						";
+	</main> <!-- col.// -->
+</div>
 
-							}
-						}
-						
-						?>
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
 
-						</ul>
-				</div>
 
-				<?php
-				getcategoreis(); 
-				getProductCategoreis(); 
-				?>
-			</div>
-		</div>
-	</div>
-		
-
-	<!-- Footer -->
+       	<!-- Footer -->
 	<?php include "store_footer.php" ?>
 
 	

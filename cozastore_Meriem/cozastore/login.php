@@ -1,6 +1,6 @@
 
 
-
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +38,37 @@
 
     <!-- Header -->
     <?php include "includes/store_nav2.php"?>
+    <?php
+    
+if (isset($_POST['login_user'])) {
+  
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $password = md5($password);
+    $select_user = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+    $run_user = mysqli_query($db,$select_user);
 
+    $get_ip = getIpUser();
+    $check_user = mysqli_num_rows($run_user);
+    $row_user = mysqli_fetch_array($run_user);
+    $user_id = $row_user['id'];
+    $selsct_cart = "SELECT * FROM cart WHERE ip_add=' $get_ip'";
+    $run_cart = mysqli_query($db, $selsct_cart);
+    $check_cart = mysqli_num_rows($run_cart);
+    if($check_user == 0){
+        echo " <script>alert('this email or password is wrong')</script>";
+        exit();
+    }
+    if($check_user==1 AND $check_cart==0){
+        $_SESSION['id'] = $user_id;
+        $_SESSION['username'] = $username;
+        echo " <script>alert('Welcome $username')</script>";
+        echo " <script>window.open('account_user.php','_self')</script>";
+    }
+    
+
+}
+?>   
 
     <!-- Title page -->
     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
@@ -60,12 +90,12 @@
 
                         <div class="bor8 m-b-20 how-pos4-parent">
                             <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="username"
-                                placeholder="Your Email Address" required>
-                            <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                                placeholder="Username" required>
+                            
                         </div>
 
                         <div class="bor8 m-b-30">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="password_1"
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="password"
                                 placeholder="Your password" required>
                         </div>
 
@@ -132,3 +162,4 @@
 </body>
 
 </html>
+

@@ -3,13 +3,11 @@
 session_start();
  include "admin_header.php"
 ?>
-
-
 <?php 
 
 if (isset($_POST['add_coupons'])) {
     $coupon_title = $_POST['coupons_title'];
-    $coupon_price = $_POST['coupons_porcent'];
+    $coupon_porcent = $_POST['coupons_porcent'];
     $coupon_limit = $_POST['coupons_limit'];
     $coupon_pro_id = $_POST['product_id'];
     $coupon_used = 0;
@@ -22,7 +20,7 @@ if (isset($_POST['add_coupons'])) {
         echo " <script>alert('Coupons Code/ Product Already Added. Choose Another Coupon Code ')</script>";
         
     }else{
-        $insert_coupon = "INSERT INTO coupons (product_id, coupon_title, coupon_price, coupon_code, coupon_limit, coupon_used) VALUES ('$coupon_pro_id', '$coupon_title', '$coupon_price', '$coupon_code', '$coupon_limit', '$coupon_used')";
+        $insert_coupon = "INSERT INTO coupons (product_id, coupon_title, coupon_price, coupon_code, coupon_limit, coupon_used) VALUES ('$coupon_pro_id', '$coupon_title', '$coupon_porcent', '$coupon_code', '$coupon_limit', '$coupon_used')";
         $run_coupon = mysqli_query($db, $insert_coupon);
         if($run_coupon){
             echo " <script>alert('Your Coupons Has Been Created')</script>";
@@ -42,7 +40,7 @@ if (isset($_POST['add_coupons'])) {
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Add coupons
+                            Add categorie coupons
                             
                            
                         </h1>
@@ -50,7 +48,7 @@ if (isset($_POST['add_coupons'])) {
                     </div>
                 </div>
                 <!-- /.row -->
-             <form action="add_coupon.php" method="post" >    
+             <form action="add_coupon_categ.php" method="post" >    
      
      
                     <div class="form-group">
@@ -59,8 +57,8 @@ if (isset($_POST['add_coupons'])) {
                     </div>
 
                     <div class="form-group">
-                        <label for="coupons_porcent">coupons pourcentage réduction</label>
-                        <input type="number" min="0" max="100" class="form-control" name="coupons_porcent">
+                        <label for="coupons_porcent">coupon pourcentage réduction</label>
+                        <input type="number" class="form-control" min="0" max="100" name="coupons_porcent">
                     </div>
 
                     <div class="form-group">
@@ -69,17 +67,17 @@ if (isset($_POST['add_coupons'])) {
                     </div>
 
                     <div class="form-group">
-                        <label for="title"> Select Product </label>
+                        <label for="title"> Select categorie </label>
                         <select name="product_id" class="form-control" required>
                         
-                        <option selected disabled> Select Product For Coupon </option>
+                        <option selected disabled> Select categorie For Coupon </option>
                         <?php 
-                        $get_pro = "SELECT * FROM products";
-                        $run_pro = mysqli_query($db, $get_pro);
-                        while($row_pro = mysqli_fetch_array($run_pro)){
-                            $pro_id = $row_pro['product_id'];
-                            $pro_title = $row_pro['product_title'];
-                            echo "<option value='$pro_id'> $pro_title </option> ";
+                        $get_p_cat = "SELECT * FROM product_categories";
+                        $run_p_cat = mysqli_query($db, $get_p_cat);
+                        while($row_p_cat = mysqli_fetch_array($run_p_cat)){
+                            $p_cat_id = $row_p_cat['p_cat_Id'];
+                            $p_cat_title = $row_p_cat['p_cat_title'];
+                            echo "<option value='$p_cat_id'> $p_cat_title </option> ";
                         }
                         
                         ?>

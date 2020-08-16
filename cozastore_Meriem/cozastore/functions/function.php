@@ -45,7 +45,7 @@ function add_cart(){
 function addProduct(){
     global $db;
 
-    $get_products = "SELECT * FROM products WHERE product_archive = '0' ORDER BY 1 DESC LIMIT 0,8";
+    $get_products = "SELECT * FROM products WHERE product_archive = '0'  ORDER BY 1 DESC LIMIT 0,8";
     $run_products = mysqli_query($db, $get_products);
     while($row_products=mysqli_fetch_array($run_products)){
         $products_id = $row_products['product_id'];

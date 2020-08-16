@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <?php include "db.php" ?>
 <?php 
 if(isset($_GET['products_id'])){
@@ -224,7 +225,9 @@ if(isset($_GET['products_id'])){
 								</div>
 								<div class="flex-w flex-r-m p-b-10">
 										<button  class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
-											Add to cart
+											<a class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 " >
+												Add to cart
+											</a>	
 										</button>
 								</div>
 

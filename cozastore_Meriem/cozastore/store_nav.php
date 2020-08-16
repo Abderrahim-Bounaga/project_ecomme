@@ -1,4 +1,4 @@
-<?php session_start() ?>
+
 <?php include "db.php" ?>
 <?php include "functions/function.php"?>
 
@@ -22,12 +22,15 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="register.php" class="flex-c-m trans-04 p-lr-25">
-							Register
-						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
+						<a href="register.php" class="flex-c-m trans-04 p-lr-25">
+						    <?php 
+							if(!isset($_SESSION['username'])){
+								echo "<a class='flex-c-m trans-04 p-lr-25' href='register.php'> Register </a>";
+							}else{
+								echo "<a class='flex-c-m trans-04 p-lr-25' href='account_user.php'> My Account </a>"; 
+							}
+							?>
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
@@ -37,7 +40,7 @@
 						<a href="login.php" >
 						<?php 
                         if(!isset($_SESSION['username'])){
-                            echo "<a class='flex-c-m trans-04 p-lr-25' href='login.php'> Login </a>";
+                            echo "<a class='flex-c-m trans-04 p-lr-25'  href='login.php'> Login </a>";
                         }else{
                             echo "<a class='flex-c-m trans-04 p-lr-25' href='logout.php'> Logout </a>"; 
                         }
@@ -83,7 +86,13 @@
 							</li>
 
 							<li>
-								<a href="login.php">Login</a>
+								<?php 
+								if(!isset($_SESSION['username'])){
+									echo "<a  href='register.php'> Register </a>";
+								}else{
+									echo "<a  href='account_user.php'> My Account </a>"; 
+								}
+								?>
 							</li>
 
 							<li>
@@ -100,9 +109,21 @@
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php items(); ?>">
+            
+						<?php 
+
+						if (isset($_SESSION['id'])) {
+						?>
+
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php items(); ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
+						<?php
+								}else{
+								echo "<div class='icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart' data-notify='0'>
+								<i class='zmdi zmdi-shopping-cart'></i>
+							</div>"; 
+						}?>
 
 						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
@@ -170,8 +191,14 @@
 							Register
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
+						<a href="register.php" class="flex-c-m p-lr-10 trans-04">
+						    <?php 
+							if(!isset($_SESSION['username'])){
+								echo "<a class='flex-c-m trans-04 p-lr-25' href='register.php'> Register </a>";
+							}else{
+								echo "<a class='flex-c-m trans-04 p-lr-25' href='account_user.php'> My Account </a>"; 
+							}
+							?>
 						</a>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
@@ -217,7 +244,13 @@
 				</li>
 
 				<li>
-					<a href="login.php">Login</a>
+				<?php 
+				if(!isset($_SESSION['username'])){
+				echo "<a  href='register.php'> Register </a>";
+				}else{
+				echo "<a  href='account_user.php'> My Account </a>"; 
+				}
+				?>
 				</li>
 
 				<li>

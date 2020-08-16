@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <?php
 $alert = "";
 use PHPMailer\PHPMailer\PHPMailer;

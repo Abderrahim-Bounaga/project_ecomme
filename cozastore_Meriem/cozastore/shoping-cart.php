@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+if (isset($_SESSION['id'])) {
+    $username = $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,6 +153,7 @@
 							<button type="submit" name="update" value="update cart" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								Update Cart
 							</button>
+							
 								
 							
 						</div>
@@ -231,8 +238,10 @@
 							</div>
 						</div>
 						<div class="flex-w p-l-163 m-l-163">
-						<button class="flex-c-m stext-101 cl0 size-115 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						<button >
+							<a class="flex-c-m stext-101 cl0 size-115 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" href="payment_options.php">
 							Proceed to Checkout
+							</a>
 						</button>
 						</div>
 					</div>
@@ -243,13 +252,13 @@
 	<?php 
 	if(isset($_POST['apply_coupon'])){
 		$code = $_POST['code'];
-		if($code = ""){
+		if($code == ""){
 
 		}else{
 			$get_coupons = "SELECT * FROM coupons WHERE coupon_code ='$code'";
 			$run_coupons = mysqli_query($db, $get_coupons);
 			$check_coupons = mysqli_num_rows($run_coupons);
-			if($check_coupons = "1"){
+			if($check_coupons == "1"){
 				$row_coupons = mysqli_fetch_array($run_coupons);
 				$coupon_pro_id = $row_coupons['product_id'];
 				$coupon_price = $row_coupons['coupon_price'];
@@ -263,7 +272,7 @@
 					$run_cart = mysqli_query($db, $get_cart);
 					$check_cart = mysqli_num_rows($run_cart);
 
-					if($check_cart = "1"){
+					if($check_cart == "1"){
 						$add_used = "UPDATE coupons SET coupon_used=coupon_used+1 WHERE coupon_code ='$code'";
 						$run_used = mysqli_query($db, $add_used);
 						$update_cart = "UPDATE cart SET p_price='$coupon_price' WHERE p_id='$coupon_pro_id' AND ip_add ='$ip_add'";
@@ -343,3 +352,11 @@
 
 </body>
 </html>
+<?php
+
+}
+else {
+    header("location:login.php");
+}
+
+?>

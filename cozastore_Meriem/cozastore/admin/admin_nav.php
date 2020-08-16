@@ -135,6 +135,24 @@
                             <li>
                                 <a href="archive_product.php">Archive Products</a>
                             </li>
+                            <li>
+                                <a href="categories_product.php"> Catégorie</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#blog"><i class="fa fa-fw fa-dropbox"></i> Blog <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="blog" class="collapse">
+                            <li>
+                                <a href="view_Blog.php">View Blog</a>
+                            </li>
+                            <li>
+                                <a href="add_Blog.php">Add Blog</a>
+                            </li>
+                            <li>
+                                <a href="archive_Blog.php">Archive Blog</a>
+                            </li>
+                            
                         </ul>
                     </li>
                     <li>
@@ -145,6 +163,9 @@
                             </li>
                             <li>
                                 <a href="add_coupon.php">Add Coupons</a>
+                            </li>
+                            <li>
+                                <a href="add_coupon_categ.php">Add Coupons categories</a>
                             </li>
                             
                         </ul>

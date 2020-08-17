@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2020 at 12:23 PM
+-- Generation Time: Aug 17, 2020 at 02:29 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.30
 
@@ -159,7 +159,8 @@ INSERT INTO `customer_orders` (`order_id`, `customer_id`, `due_amount`, `invoice
 (15, 0, 150, 1341316258, 'bej_erkek_pantolon_84671.jpg', 'Pantalon', 1, 'Blue', 'Size M', '2020-08-13', 'pending'),
 (16, 0, 100, 851848114, 'beyaz_erkek_tshirt_kkol_118360.jpg', 'T-Chert', 1, 'Blue', 'Size M', '2020-08-13', 'pending'),
 (17, 10, 170, 1605176076, 'mavi_kadin_gomlek_ukol_113252.jpg', 'Chemise', 1, 'Blue', 'Size M', '2020-08-13', 'Complete'),
-(18, 10, 500, 1587553630, 'denim_kadin_ceket_126554.jpg', 'Jackets', 2, 'Blue', 'Size M', '2020-08-15', 'pending');
+(18, 10, 500, 1587553630, 'denim_kadin_ceket_126554.jpg', 'Jackets', 2, 'Blue', 'Size M', '2020-08-15', 'pending'),
+(19, 10, 150, 1598422444, '041_danny_dar_kesim_dusuk_bel_dar_paca_siyah_jean_pantolon_132041.jpg', 'Pantalon', 1, 'Blue', 'Size M', '2020-08-17', 'pending');
 
 -- --------------------------------------------------------
 
@@ -225,7 +226,8 @@ INSERT INTO `pending_orders` (`order_id`, `customer_id`, `invoice_no`, `product_
 (15, 0, 1341316258, 23, 'Blue', 1, 'Size M', 'pending'),
 (16, 0, 851848114, 15, 'Blue', 1, 'Size M', 'pending'),
 (17, 10, 1605176076, 19, 'Blue', 1, 'Size M', 'Complete'),
-(18, 10, 1587553630, 22, 'Blue', 2, 'Size M', 'pending');
+(18, 10, 1587553630, 22, 'Blue', 2, 'Size M', 'pending'),
+(19, 10, 1598422444, 18, 'Blue', 1, 'Size M', 'pending');
 
 -- --------------------------------------------------------
 
@@ -348,6 +350,31 @@ INSERT INTO `slide` (`id_slide`, `image_slide`, `title_slide`, `desc_slide`, `ar
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `terms`
+--
+
+CREATE TABLE `terms` (
+  `term_id` int(10) NOT NULL,
+  `term_title` varchar(100) NOT NULL,
+  `term_link` varchar(100) NOT NULL,
+  `term_desc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `terms`
+--
+
+INSERT INTO `terms` (`term_id`, `term_title`, `term_link`, `term_desc`) VALUES
+(1, 'Les conditions générales de vente :', 'conditions', 'Nous avons tous déjà vu ce long texte sur les sites de boutique en ligne. Il s\'agit en fait d\'un contrat tacite que passent le marchand et le client. Les deux parties doivent être d\'accord avec les termes des conditions générales de vente. Cependant, cela n\'autorise pas le commerçant d\'afficher des clauses abusives (contraires à la loi).\r\nExemple de clause abusive : Si une boutique en ligne de vente de produits électroniques ou informatiques indique qu\'en cas de panne pendant la garantie, le produit ne doit pas lui être retourné, mais qu\'il s\'agit d\'une \"garantie constructeur\", et que le client doit contacter le constructeur directement. C\'est une clause illégale. Le vendeur doit prendre en charge le produit qu\'il a vendu et s\'occuper de la réparation. Le client est en droit de retourner à la boutique, le produit en panne.\r\nDans les conditions générales de vente, n\'oubliez pas d\'aborder les points essentiels :\r\nCommencez par définir les noms des deux partis dans le texte,\r\nPrésenter la prestation.\r\nDescription du passage de commande,\r\nLes tarifs, les taxes, et la durée de validité des prix,\r\nLes modes de paiement,\r\nLa garantie,\r\nLes conditions de retour marchandise,\r\nDélai, prix et moyen de livraison,\r\nRappel du droit et du délai de rétractation sans frais et sans justification pendant 7 jours.\r\nL\'assistance téléphonique, Email, etc...\r\nLes limites de responsabilité,\r\nLes moyens de contacts, et leurs horaires,\r\nLes cas de force majeur,\r\nLe tribunal compétant en cas de litige,\r\nLe fonctionnement du logiciel de la boutique et ses compatibilités avec les OS,\r\nLes droits d\'auteur,'),
+(2, '', '', ''),
+(3, '', '', '                        '),
+(4, '', '', ''),
+(5, 'Les mentions légales', 'mentions', '<p>test</p>'),
+(6, 'hklklg', 'gdfghjk', '<p>test hskqjg&lt;wbjlkjbhcghekhlkkxn sxkhxl,bvhnnvb,wgxx</p>');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -378,7 +405,7 @@ INSERT INTO `user` (`id`, `username`, `email`, `city`, `address`, `contact`, `us
 (7, 'nouha', 'nouha@gmail.com', '', '', '', '', '14f5c0da2b4577d575c52bdcdbbbb3ee', '2020-07-27', ''),
 (8, 'usertest', 'user@gmail.com', '', '', '', '', 'a176b04df256e82d5862e61a73cca8cf', '2020-08-02', ' ::1'),
 (9, 'nouhaila', 'nouhaila@gmail.com', '', '', '', '', 'bf5591a2b1a5bdd8ecf788ea595513d3', '2020-08-06', ' ::1'),
-(10, 'meryy', 'username@gmail.com', 'marrakech', 'hussna 1 mhamid', '0601770194', 'gallery-03.jpg', '952f65a3e898eb679fe678ecfa495b9c', '2020-08-06', ' ::1');
+(10, 'meryy', 'username@gmail.com', 'marrakech', 'hussna 1 mhamid', '0601770194', 'gallery-02.jpg', '952f65a3e898eb679fe678ecfa495b9c', '2020-08-06', ' ::1');
 
 --
 -- Indexes for dumped tables
@@ -457,6 +484,12 @@ ALTER TABLE `slide`
   ADD PRIMARY KEY (`id_slide`);
 
 --
+-- Indexes for table `terms`
+--
+ALTER TABLE `terms`
+  ADD PRIMARY KEY (`term_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -494,7 +527,7 @@ ALTER TABLE `coupons`
 -- AUTO_INCREMENT for table `customer_orders`
 --
 ALTER TABLE `customer_orders`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -506,7 +539,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `pending_orders`
 --
 ALTER TABLE `pending_orders`
-  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -531,6 +564,12 @@ ALTER TABLE `register_admin`
 --
 ALTER TABLE `slide`
   MODIFY `id_slide` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `terms`
+--
+ALTER TABLE `terms`
+  MODIFY `term_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`

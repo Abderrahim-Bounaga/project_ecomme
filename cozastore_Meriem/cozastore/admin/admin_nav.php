@@ -171,6 +171,17 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#terms"><i class="fa fa-fw fa-table"></i> Terms <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="terms" class="collapse">
+                            <li>
+                                <a href="view_terms.php">View Terms</a>
+                            </li>
+                            <li>
+                                <a href="add_terms.php">Add Terms</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#slide"><i class="fa fa-fw fa-gear"></i> slide <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="slide" class="collapse">
                             <li>

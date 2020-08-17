@@ -27,7 +27,6 @@ include "admin_header.php"
                         <th>Description</th>
                         <th>Edit</th>
                         <th>archive</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 

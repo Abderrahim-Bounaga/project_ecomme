@@ -25,7 +25,11 @@ include "admin_header.php"
                 
                         <th>Id</th>
                         <th>Username</th>                       
+                        <th>Profil</th>                       
                         <th>Email</th>                       
+                        <th>City</th>                       
+                        <th>Adress</th>                       
+                        <th>Contact</th>                       
                         <th>Date</th>
                         <th>Delete</th>
                     </tr>
@@ -44,14 +48,22 @@ include "admin_header.php"
                                 $user_id = $row['id'];
                                 $user_name = $row['username'];
                                 $user_email = $row['email'];
+                                $user_city = $row['city'];
+                                $user_adress = $row['address'];
+                                $user_contact = $row['contact'];
+                                $user_image = $row['user_img'];
                                 $user_date = $row['date_inscr'];
                                 
                                 echo "<tr>";
                                 echo "<td>$user_id</td>";
                                 echo "<td>$user_name</td>";
+                                echo "<td><img class= 'img-responsive' src='../customer/img/$user_image' alt=''  width='30%' height='30%'></td>";
                                 echo "<td>$user_email</td>";
+                                echo "<td>$user_city</td>";
+                                echo "<td>$user_adress</td>";
+                                echo "<td>$user_contact</td>";
                                 echo "<td>$user_date</td>";                               
-                                echo "<td><a href='users.php?delete=$user_id'>Delete</a></td>";
+                                echo "<td><a href='users.php?delete=$user_id'><i class='fa fa-trash'></i>Delete</a></td>";
                                 echo "</tr>";
                             }
                             

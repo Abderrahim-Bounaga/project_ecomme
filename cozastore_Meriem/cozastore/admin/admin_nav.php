@@ -141,6 +141,34 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#products_cat"><i class="fa fa-fw fa-tag"></i> Products Categories <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="products_cat" class="collapse">
+                            <li>
+                                <a href="view_p_cat.php">View Products Categories</a>
+                            </li>
+                            <li>
+                                <a href="add_p_cat.php">Add Products Categories</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#cat"><i class="fa fa-fw fa-edit"></i> Categories <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="cat" class="collapse">
+                            <li>
+                                <a href="view_categories.php">View Categories</a>
+                            </li>
+                            <li>
+                                <a href="add_categories.php">Add Categories</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="view_orders.php"><i class="fa fa-fw fa-bar-chart-o"></i> Orders</a>
+                    </li>
+                    <li>
+                        <a href="view_payments.php"><i class="fa fa-fw fa-money"></i> Payments</a>
+                    </li>
+                    <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#blog"><i class="fa fa-fw fa-dropbox"></i> Blog <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="blog" class="collapse">
                             <li>

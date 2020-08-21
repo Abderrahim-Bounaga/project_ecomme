@@ -58,7 +58,7 @@
 				<aside class="col-md-3"><!-- col-md-3 Begin -->
 				
 				    <nav id="navbar-example3" class="navbar navbar-light bg-light"><!-- box Begin -->
-						<ul class="nav nav-pills nav-stacked"><!-- nav nav-pills nav-stacked Begin -->
+						<ul class="nav nav-pills "><!-- nav nav-pills nav-stacked Begin -->
 						
 							<?php 
 							
@@ -151,7 +151,7 @@
 
 						?>
 
-							<div id="<?php echo $term_link; ?>" data-spy="scroll"  data-offset="0"><!-- tab-pane fade in active Begin -->
+							<div id="<?php echo $term_link; ?>" class="tab-pane fade in active"><!-- tab-pane fade in active Begin -->
 							
 							<h1 class="tabTitle"><?php echo $term_title; ?></h1>
 							<p class="tabDesc"><?php echo $term_desc; ?></p>

@@ -85,9 +85,9 @@
 								<a href="promotion.php">Promotion</a>
 							</li>
 
-							<!-- <li>
+							<li>
 								<a href="blog.php">Blog</a>
-							</li> -->
+							</li>
 
 							<li>
 								<a href="about.php">About</a>
@@ -133,7 +133,7 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block">
+					<a href="account_user.php" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 					</a>
 
@@ -144,16 +144,10 @@
 						$query = "SELECT COUNT(*) as total FROM `cart` ";
 						$shop_query = mysqli_query($db,$query);
 						$data=mysqli_fetch_assoc($shop_query);
-
 						$contor = $data['total'];
-
-
-
 						?>
-
 					<div class="header-wrapicon2">
 					<?php 
-
 						if (isset($_SESSION['id'])) {
 						 ?>
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">

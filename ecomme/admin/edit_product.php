@@ -18,6 +18,7 @@ $p_price = $row['product_price'];
 $p_trend = $row['trend_product'];
 $p_promo = $row['promotion'];
 $pro_price = $row['promo_price'];
+$pro_date = $row['promo_date'];
 }
 
 if (isset($_POST['edit_product'])) {
@@ -30,8 +31,9 @@ if (isset($_POST['edit_product'])) {
     $trend_product = $_POST['trend_product'];
     $promotion = $_POST['promotion'];
     $promo_price = $_POST['promo_price'];
+    $promo_date = $_POST['promo_date'];
 
-    move_uploaded_file($product_image_temp, "/img/$product_image");
+    move_uploaded_file($product_image_temp, "./img/$product_image");
 
     $product_title = mysqli_real_escape_string($db,$product_title);
     $product_image = mysqli_real_escape_string($db,$product_image);
@@ -39,7 +41,7 @@ if (isset($_POST['edit_product'])) {
     $trend_product = mysqli_real_escape_string($db,$trend_product);
     $product_info = mysqli_real_escape_string($db,$product_info);
 
-    $query = "UPDATE products SET product_title = '$product_title' ,trend_product ='$trend_product',product_image ='$product_image', product_desc = '$product_desc', product_info = '$product_info', product_price = '$product_price' , promotion = '$promotion' , promo_price = '$promo_price' WHERE product_id = $p_id ";
+    $query = "UPDATE products SET product_title = '$product_title' ,trend_product ='$trend_product',product_image ='$product_image', product_desc = '$product_desc', product_info = '$product_info', product_price = '$product_price' , promotion = '$promotion' , promo_price = '$promo_price', promo_date = '$promo_date' WHERE product_id = $p_id ";
     $edit_product_query = mysqli_query($db,$query);
 
     if (!$edit_product_query) {
@@ -131,6 +133,11 @@ if (isset($_POST['edit_product'])) {
                         <label for="product_price">Promotion Price</label>
                         <input type="number" value = "<?php echo $pro_price ?>" class="form-control" name="promo_price">
                     </div>
+                    <div class="form-group">
+                        <label for="product_price">Promotion Date</label>
+                        <input type="datetime-local" value = "<?php echo $pro_date ?>" class="form-control" name="promo_date">
+                    </div>
+                    
                     
                     
 

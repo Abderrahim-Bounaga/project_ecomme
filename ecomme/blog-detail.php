@@ -62,14 +62,28 @@
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-50 p-r-0-lg">
+					<?php 
+           
+							$get_blog = "SELECT * FROM blog";
+							$run_blog = mysqli_query($db,$get_blog);
+
+							while($run_blog_section=mysqli_fetch_array($run_blog)){
+
+								$blog_id = $run_blog_section['blog_id'];
+								$blog_title = $run_blog_section['blog_title'];
+								$blog_img = $run_blog_section['blog_img'];
+								$blog_desc = $run_blog_section['blog_desc'];
+								$blog_date = $run_blog_section['blog_date'];
+							
+						?>
 						<div class="p-b-40">
 							<div class="blog-detail-img wrap-pic-w">
-								<img src="images/blog-04.jpg" alt="IMG-BLOG">
+								<img src="images/blog/<?php echo $blog_img; ?>" alt="IMG-BLOG">
 							</div>
 
 							<div class="blog-detail-txt p-t-33">
 								<h4 class="p-b-11 m-text24">
-									Black Friday Guide: Best Sales & Discount Codes
+								<?php echo $blog_title; ?>
 								</h4>
 
 								<div class="s-text8 flex-w flex-m p-b-21">
@@ -79,7 +93,7 @@
 									</span>
 
 									<span>
-										28 Dec, 2018
+									<?php echo $blog_date; ?>
 										<span class="m-l-3 m-r-6">|</span>
 									</span>
 
@@ -94,13 +108,16 @@
 								</div>
 
 								<p class="p-b-25">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed turpis sed lorem dignissim vulputate nec cursus ante. Nunc sit amet tempor magna. Donec eros sem, porta eget leo et, varius eleifend mauris. Donec eu leo congue, faucibus quam eu, viverra mauris. Nulla consectetur lorem mi, at scelerisque metus hendrerit vitae. Proin vel magna vel neque porta ultricies non eget mauris. Suspendisse potenti.
+								<?php echo $blog_desc; ?>								
 								</p>
 
 								<p class="p-b-25">
-									Aliquam faucibus scelerisque placerat. Vestibulum vel libero eu nulla varius pretium eget eu magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean dictum faucibus felis, ac vestibulum risus mollis in. Phasellus neque dolor, euismod vitae auctor eget, dignissim a felis. Etiam malesuada elit a nibh aliquam, placerat ultricies nibh dictum. Nam ut egestas velit. Pellentesque viverra tincidunt tellus. Etiam cursus, ligula id vehicula cursus, turpis mauris facilisis massa, eget tincidunt est purus et odio. Nam quis luctus libero, non posuere velit. Ut eu varius diam, eu euismod elit. Donec efficitur, neque eu consectetur consectetur, dui sem consectetur felis, vitae rutrum risus urna vel arcu. Aliquam semper ullamcorper laoreet. Sed arcu lectus, fermentum imperdiet purus eu, ornare ornare libero.
+								<?php echo $blog_desc; ?>								
 								</p>
 							</div>
+							<?php
+							}
+							?>
 
 							<div class="flex-m flex-w p-t-20">
 								<span class="s-text20 p-r-20">
@@ -163,42 +180,31 @@
 								<i class="fs-13 fa fa-search" aria-hidden="true"></i>
 							</button>
 						</div>
-
-						<!-- Categories -->
 						<h4 class="m-text23 p-t-56 p-b-34">
 							Categories
 						</h4>
 
 						<ul>
-							<li class="p-t-6 p-b-8 bo6">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Fashion
-								</a>
-							</li>
+						<?php 
 
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Beauty
-								</a>
-							</li>
+                           $get_cat = "SELECT * FROM categories WHERE Category_archif = '0'";
+                           $run_cat = mysqli_query($db, $get_cat);
+                           while($row_cat= mysqli_fetch_array($run_cat)){
+                               $cat_id = $row_cat['Category_id'];
+                               $cat_title = $row_cat['Category_title'];
 
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Street Style
-								</a>
-							</li>
-
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Life Style
-								</a>
-							</li>
-
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									DIY & Crafts
-								</a>
-							</li>
+                               echo "
+							  
+									<li class='p-t-6 p-b-8 bo6'>
+										<a  value='$cat_id' class='s-text13 p-t-5 p-b-5' href='product.php?cat=$cat_id'>
+										$cat_title 
+										</a>
+									</li>
+									
+                               ";
+                           }
+                          ?>
+							
 						</ul>
 
 						<!-- Featured Products -->
@@ -207,88 +213,46 @@
 						</h4>
 
 						<ul class="bgwhite">
+						<?php 
+							$query = "SELECT * FROM products WHERE trend_product = 1 ";
+                            $load_products_query = mysqli_query($db,$query);
+
+                            if (!$load_products_query) {
+                                die("QUERY FAILED". mysqli_error($db));
+                            }
+
+                            while ($row = mysqli_fetch_array($load_products_query)) {
+                                $product_id = $row['product_id'];
+                                $product_title = $row['product_title'];
+                                $product_image = $row['product_image'];
+                                $product_desc = $row['product_desc'];
+                                $product_info = $row['product_info'];
+                                $product_date = $row['product_date'];
+                                $product_price = $row['product_price'];
+
+                                ?>
 							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-16.jpg" alt="IMG-PRODUCT">
+								<a href='product-detail.php?product_id=<?php echo $product_id?>' class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
+									<img src="admin/img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
 								</a>
 
 								<div class="w-size23 p-t-5">
 									<a href="product-detail.php" class="s-text20">
-										White Shirt With Pleat Detail Back
+									<?php echo $product_title ?>
 									</a>
 
 									<span class="dis-block s-text17 p-t-6">
-										$19.00
+									<?php echo $product_price ?>
 									</span>
 								</div>
 							</li>
+							<?php }
 
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-17.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Converse All Star Hi Black Canvas
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$39.00
-									</span>
-								</div>
-							</li>
-
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-08.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Nixon Porter Leather Watch In Tan
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$17.00
-									</span>
-								</div>
-							</li>
-
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-03.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Denim jacket blue
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$39.00
-									</span>
-								</div>
-							</li>
-
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-05.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Nixon Porter Leather Watch In Tan
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$17.00
-									</span>
-								</div>
-							</li>
+							?>
+							
 						</ul>
 
-						<!-- Archive -->
+						<!-- Archive
 						<h4 class="m-text23 p-t-50 p-b-16">
 							Archive
 						</h4>
@@ -373,7 +337,7 @@
 									(26)
 								</span>
 							</li>
-						</ul>
+						</ul> -->
 
 						<!-- Tags -->
 						<h4 class="m-text23 p-t-50 p-b-25">
@@ -407,204 +371,4 @@
 		</div>
 	</section>
 
-<!-- Footer -->
-<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
-		<div class="flex-w p-b-90">
-			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					GET IN TOUCH
-				</h4>
-
-				<div>
-					<p class="s-text7 w-size27">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-					</p>
-
-					<div class="flex-m p-t-30">
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
-					</div>
-				</div>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Categories
-				</h4>
-
-				<ul>
-					
-
-					<?php 
-
-                           $get_cat = "SELECT * FROM categories";
-                           $run_cat = mysqli_query($db, $get_cat);
-                           while($row_cat= mysqli_fetch_array($run_cat)){
-                               $cat_id = $row_cat['Category_id'];
-                               $cat_title = $row_cat['Category_title'];
-
-                               echo "
-							  
-									<li class='p-b-9'>
-										<a  value=' $cat_id' href='#'>
-										$cat_title 
-										</a>
-									</li>
-									
-                               ";
-                           }
-                          ?>
-				</ul>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Links
-				</h4>
-
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Search
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							About Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Contact Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-				Sou_Category
-				</h4>
-
-				<ul>
-				<?php 
-
-				$get_cat = "SELECT * FROM sou_Category";
-				$run_cat = mysqli_query($db, $get_cat);
-				while($row_cat= mysqli_fetch_array($run_cat)){
-					$sou_cat_id = $row_cat['Sou_Category_id'];
-					$sou_cat_title = $row_cat['Sou_Category_title'];
-
-					echo "
-				
-						<li class='p-b-9'>
-							<a  value=' $sou_cat_id' href='#'>
-							$sou_cat_title 
-							</a>
-						</li>
-					
-					";
-				}
-				?>
-				</ul>
-			</div>
-
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					Newsletter
-				</h4>
-
-				<form>
-					<div class="effect1 w-size9">
-						<input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
-						<span class="effect1-line"></span>
-					</div>
-
-					<div class="w-size2 p-t-20">
-						<!-- Button -->
-						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-							Subscribe
-						</button>
-					</div>
-
-				</form>
-			</div>
-		</div>
-
-		<div class="t-center p-l-15 p-r-15">
-			<a href="#">
-				<img class="h-size2" src="images/icons/paypal.png" alt="IMG-PAYPAL">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/express.png" alt="IMG-EXPRESS">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
-			</a>
-
-			<div class="t-center s-text8 p-t-20">
-				Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-			</div>
-		</div>
-	</footer>
-
-
-	<!-- Back to top -->
-	<div class="btn-back-to-top bg0-hov" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
-		</span>
-	</div>
-
-	<!-- Container Selection -->
-	<div id="dropDownSelect1"></div>
-	<div id="dropDownSelect2"></div>
-
-
-
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
-	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
-	<script type="text/javascript">
-		$(".selection-1").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
-		});
-
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect2')
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
-</body>
-</html>
+	<?php require_once 'footer.php'; ?>

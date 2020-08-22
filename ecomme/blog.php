@@ -63,20 +63,34 @@ if (isset($_SESSION['id'])) {
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-75">
 					<div class="p-r-50 p-r-0-lg">
+					<?php 
+           
+							$get_blog = "SELECT * FROM blog";
+							$run_blog = mysqli_query($db,$get_blog);
+
+							while($run_blog_section=mysqli_fetch_array($run_blog)){
+
+								$blog_id = $run_blog_section['blog_id'];
+								$blog_title = $run_blog_section['blog_title'];
+								$blog_img = $run_blog_section['blog_img'];
+								$blog_desc = $run_blog_section['blog_desc'];
+								$blog_date = $run_blog_section['blog_date'];
+							
+						?>
 						<!-- item blog -->
 						<div class="item-blog p-b-80">
 							<a href="blog-detail.php" class="item-blog-img pos-relative dis-block hov-img-zoom">
-								<img src="images/blog-04.jpg" alt="IMG-BLOG">
+								<img src="images/blog/<?php echo $blog_img; ?>" alt="IMG-BLOG">
 
 								<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1">
-									28 Dec, 2018
+								<?php echo $blog_date; ?>
 								</span>
 							</a>
 
 							<div class="item-blog-txt p-t-33">
 								<h4 class="p-b-11">
 									<a href="blog-detail.php" class="m-text24">
-										Black Friday Guide: Best Sales & Discount Codes
+									<?php echo $blog_title; ?>
 									</a>
 								</h4>
 
@@ -97,7 +111,7 @@ if (isset($_SESSION['id'])) {
 								</div>
 
 								<p class="p-b-12">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
+								<?php echo $blog_desc; ?>
 								</p>
 
 								<a href="blog-detail.php" class="s-text20">
@@ -107,181 +121,7 @@ if (isset($_SESSION['id'])) {
 							</div>
 						</div>
 
-						<!-- item blog -->
-						<div class="item-blog p-b-80">
-							<a href="blog-detail.php" class="item-blog-img pos-relative dis-block hov-img-zoom">
-								<img src="images/blog-05.jpg" alt="IMG-BLOG">
-
-								<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1">
-									26 Dec, 2018
-								</span>
-							</a>
-
-							<div class="item-blog-txt p-t-33">
-								<h4 class="p-b-11">
-									<a href="blog-detail.php" class="m-text24">
-										The White Sneakers Nearly Every Fashion Girls Own
-									</a>
-								</h4>
-
-								<div class="s-text8 flex-w flex-m p-b-21">
-									<span>
-										By Admin
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										Fashion, Life style
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										8 Comments
-									</span>
-								</div>
-
-								<p class="p-b-12">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<a href="blog-detail.php" class="s-text20">
-									Continue Reading
-									<i class="fa fa-long-arrow-right m-l-8" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-
-						<!-- item blog -->
-						<div class="item-blog p-b-80">
-							<a href="blog-detail.php" class="item-blog-img pos-relative dis-block hov-img-zoom">
-								<img src="images/blog-08.jpg" alt="IMG-BLOG">
-
-								<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1">
-									22 Dec, 2018
-								</span>
-							</a>
-
-							<div class="item-blog-txt p-t-33">
-								<h4 class="p-b-11">
-									<a href="blog-detail.php" class="m-text24">
-										Black Friday Guide: Best Sales & Discount Codes
-									</a>
-								</h4>
-
-								<div class="s-text8 flex-w flex-m p-b-21">
-									<span>
-										By Admin
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										Cooking, Food
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										8 Comments
-									</span>
-								</div>
-
-								<p class="p-b-12">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<a href="blog-detail.php" class="s-text20">
-									Continue Reading
-									<i class="fa fa-long-arrow-right m-l-8" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-
-						<!-- item blog -->
-						<div class="item-blog p-b-80">
-							<a href="blog-detail.php" class="item-blog-img pos-relative dis-block hov-img-zoom">
-								<img src="images/blog-02.jpg" alt="IMG-BLOG">
-
-								<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1">
-									18 Dec, 2018
-								</span>
-							</a>
-
-							<div class="item-blog-txt p-t-33">
-								<h4 class="p-b-11">
-									<a href="blog-detail.php" class="m-text24">
-										Black Friday Guide: Best Sales & Discount Codes
-									</a>
-								</h4>
-
-								<div class="s-text8 flex-w flex-m p-b-21">
-									<span>
-										By Admin
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										Cooking, Food
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										8 Comments
-									</span>
-								</div>
-
-								<p class="p-b-12">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<a href="blog-detail.php" class="s-text20">
-									Continue Reading
-									<i class="fa fa-long-arrow-right m-l-8" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-
-						<!-- item blog -->
-						<div class="item-blog p-b-80">
-							<a href="blog-detail.php" class="item-blog-img pos-relative dis-block hov-img-zoom">
-								<img src="images/blog-03.jpg" alt="IMG-BLOG">
-
-								<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1">
-									16 Dec, 2018
-								</span>
-							</a>
-
-							<div class="item-blog-txt p-t-33">
-								<h4 class="p-b-11">
-									<a href="blog-detail.php" class="m-text24">
-										Black Friday Guide: Best Sales & Discount Codes
-									</a>
-								</h4>
-
-								<div class="s-text8 flex-w flex-m p-b-21">
-									<span>
-										By Admin
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										Cooking, Food
-										<span class="m-l-3 m-r-6">|</span>
-									</span>
-
-									<span>
-										8 Comments
-									</span>
-								</div>
-
-								<p class="p-b-12">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<a href="blog-detail.php" class="s-text20">
-									Continue Reading
-									<i class="fa fa-long-arrow-right m-l-8" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
+						<?php    } ?>
 					</div>
 
 					<!-- Pagination -->
@@ -308,35 +148,26 @@ if (isset($_SESSION['id'])) {
 						</h4>
 
 						<ul>
-							<li class="p-t-6 p-b-8 bo6">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Fashion
-								</a>
-							</li>
+						<?php 
 
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Beauty
-								</a>
-							</li>
+                           $get_cat = "SELECT * FROM categories WHERE Category_archif = '0'";
+                           $run_cat = mysqli_query($db, $get_cat);
+                           while($row_cat= mysqli_fetch_array($run_cat)){
+                               $cat_id = $row_cat['Category_id'];
+                               $cat_title = $row_cat['Category_title'];
 
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Street Style
-								</a>
-							</li>
-
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Life Style
-								</a>
-							</li>
-
-							<li class="p-t-6 p-b-8 bo7">
-								<a href="#" class="s-text13 p-t-5 p-b-5">
-									DIY & Crafts
-								</a>
-							</li>
+                               echo "
+							  
+									<li class='p-t-6 p-b-8 bo6'>
+										<a  value='$cat_id' class='s-text13 p-t-5 p-b-5' href='product.php?cat=$cat_id'>
+										$cat_title 
+										</a>
+									</li>
+									
+                               ";
+                           }
+                          ?>
+							
 						</ul>
 
 						<!-- Featured Products -->
@@ -345,88 +176,46 @@ if (isset($_SESSION['id'])) {
 						</h4>
 
 						<ul class="bgwhite">
+						<?php 
+							$query = "SELECT * FROM products WHERE trend_product = 1 ";
+                            $load_products_query = mysqli_query($db,$query);
+
+                            if (!$load_products_query) {
+                                die("QUERY FAILED". mysqli_error($db));
+                            }
+
+                            while ($row = mysqli_fetch_array($load_products_query)) {
+                                $product_id = $row['product_id'];
+                                $product_title = $row['product_title'];
+                                $product_image = $row['product_image'];
+                                $product_desc = $row['product_desc'];
+                                $product_info = $row['product_info'];
+                                $product_date = $row['product_date'];
+                                $product_price = $row['product_price'];
+
+                                ?>
 							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-16.jpg" alt="IMG-PRODUCT">
+								<a href='product-detail.php?product_id=<?php echo $product_id?>' class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
+									<img src="admin/img/<?php echo $product_image ?>" alt="<?php echo $product_image ?>">
 								</a>
 
 								<div class="w-size23 p-t-5">
 									<a href="product-detail.php" class="s-text20">
-										White Shirt With Pleat Detail Back
+									<?php echo $product_title ?>
 									</a>
 
 									<span class="dis-block s-text17 p-t-6">
-										$19.00
+									<?php echo $product_price ?>
 									</span>
 								</div>
 							</li>
+							<?php }
 
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-17.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Converse All Star Hi Black Canvas
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$39.00
-									</span>
-								</div>
-							</li>
-
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-08.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Nixon Porter Leather Watch In Tan
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$17.00
-									</span>
-								</div>
-							</li>
-
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-03.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Denim jacket blue
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$39.00
-									</span>
-								</div>
-							</li>
-
-							<li class="flex-w p-b-20">
-								<a href="product-detail.php" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
-									<img src="images/item-05.jpg" alt="IMG-PRODUCT">
-								</a>
-
-								<div class="w-size23 p-t-5">
-									<a href="product-detail.php" class="s-text20">
-										Nixon Porter Leather Watch In Tan
-									</a>
-
-									<span class="dis-block s-text17 p-t-6">
-										$17.00
-									</span>
-								</div>
-							</li>
+							?>
+							
 						</ul>
 
-						<!-- Archive -->
+						<!-- Archive
 						<h4 class="m-text23 p-t-50 p-b-16">
 							Archive
 						</h4>
@@ -511,7 +300,7 @@ if (isset($_SESSION['id'])) {
 									(26)
 								</span>
 							</li>
-						</ul>
+						</ul> -->
 
 						<!-- Tags -->
 						<h4 class="m-text23 p-t-50 p-b-25">

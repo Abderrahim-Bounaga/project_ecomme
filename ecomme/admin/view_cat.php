@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Product List
+                        Category List
                         </h1>
                         
                     </div>
@@ -22,6 +22,7 @@
                 
                         <th>Id</th>
                         <th>Title</th>
+                        <th>Image</th>
                         <th>Description</th>
                         <th>Date</th>
                         <th>Edit</th>
@@ -43,11 +44,13 @@
                                 $Category_title = $row['Category_title'];
                                 $Category_desc = $row['Category_desc'];
                                $Category_date = $row['Category_date'];
+                               $Category_image = $row['Category_image'];
 
 
                                 echo "<tr>";
                                 echo "<td>$Category_id</td>";
                                 echo "<td>$Category_title</td>";
+                                echo "<td><img class='img-responsive' src='./img/$Category_image' alt='' width='100' height='100'></td>";
                                 echo "<td>$Category_desc</td>";
                                 echo "<td>$Category_date</td>";
                                 echo "<td> <a href='edit_cat.php?edit=$Category_id'>Edit</a></td>";

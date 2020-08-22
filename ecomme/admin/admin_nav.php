@@ -50,24 +50,27 @@
                             <li>
                                 <a href="archif_product.php"><i class="fa fa-fw fa-plus"></i> archif Products</a>
                             </li>
+                            <li>
+                                <a href="categories_product.php"><i class="fa fa-fw fa-plus"></i> Categories</a>
+                            </li>
                         </ul>
                     </li>
-                    <li  class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-eye"></i>Categroy <b class="caret"></b></a>
+                    <!-- <li  class="dropdown">
+                        <a href="categories_product.php" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-eye"></i>Categroy <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="view_cat.php"><i class="fa fa-fw fa-eye"></i> View Cat</a>
-                            </li>
-                            <li>
-                                <a href="add_cat.php"><i class="fa fa-fw fa-plus"></i> Add Cat</a>
                             </li> 
                             <li>
+                                <a href="categories_product.php"><i class="fa fa-fw fa-plus"></i> Add Categories</a>
+                            </li> 
+                             <li>
                                 <a href="archif_cat.php"><i class="fa fa-fw fa-plus"></i> archif Cat</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li  class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-eye"></i>slide <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-gear"></i>slide <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="view_slide.php"><i class="fa fa-fw fa-eye"></i> View slide</a>
@@ -78,6 +81,52 @@
                             <li>
                                 <a href="archif_slide.php"><i class="fa fa-fw fa-plus"></i> archif slide</a>
                             </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#coupons"><i class="fa fa-fw fa-book"></i> Coupons <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="coupons" class="collapse">
+                            <li>
+                                <a href="view_coupon.php">View products Coupons</a>
+                            </li>
+                            <li>
+                                <a href="view_ctgry_coupon.php">View categories Coupons</a>
+                            </li>
+                            <li>
+                                <a href="add_coupon.php">Add product Coupons</a>
+                            </li>
+                            <li>
+                                <a href="add_coupon_ctgr.php">Add catigory Coupons</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li  class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-dropbox"></i>Blog <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="view_blog.php"><i class="fa fa-fw fa-eye"></i> View Blog</a>
+                            </li>
+                            <li>
+                                <a href="add_blog.php"><i class="fa fa-fw fa-plus"></i> Add Blog</a>
+                            </li> 
+                            <li>
+                                <a href="archif_blog.php"><i class="fa fa-fw fa-plus"></i> archif Blog</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li  class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-table"></i>terms <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="view_terms.php"><i class="fa fa-fw fa-eye"></i> View terms</a>
+                            </li>
+                            <li>
+                                <a href="add_terms.php"><i class="fa fa-fw fa-plus"></i> Add terms</a>
+                            </li> 
+                            <!-- <li>
+                                <a href="archif_blog.php"><i class="fa fa-fw fa-plus"></i> archif terms</a>
+                            </li> -->
                         </ul>
                     </li>
                     

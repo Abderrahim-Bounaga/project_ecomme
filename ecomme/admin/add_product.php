@@ -13,6 +13,8 @@ if (isset($_POST['add_product'])) {
     $trend_product = $_POST['trend_product'];
     $promotion = $_POST['promotion'];
     $promo_price = $_POST['promo_price'];
+    $promo_date = $_POST['promo_date'];
+
    
     $product_img1 = $_FILES['product_img1']['name'];
     $product_img2 = $_FILES['product_img2']['name'];
@@ -29,7 +31,7 @@ if (isset($_POST['add_product'])) {
 
    
 
-    $add_product = "INSERT INTO products (Sou_Category_id,trend_product,Category_id,product_date,product_title,product_image,product_price,product_info,product_desc,product_image2,product_image3,promotion,promo_price) VALUES ('$product_cat','$trend_product','$categories',NOW(),'$product_title','$product_img1','$product_price','$product_info','$product_desc','$product_img2','$product_img3',' $promotion','$promo_price')";
+    $add_product = "INSERT INTO products (Sou_Category_id,trend_product,Category_id,product_date,product_title,product_image,product_price,product_info,product_desc,product_image2,product_image3,promotion,promo_price,promo_date) VALUES ('$product_cat','$trend_product','$categories',NOW(),'$product_title','$product_img1','$product_price','$product_info','$product_desc','$product_img2','$product_img3',' $promotion','$promo_price','$promo_date')";
     $add_product_query = mysqli_query($db,$add_product);
 
     if($add_product_query){
@@ -151,6 +153,7 @@ if (isset($_POST['add_product'])) {
                         <label for="product_price">Product Price</label>
                         <input type="number" class="form-control" name="product_price">
                     </div>
+                    
                     <div class="form-group">
                         <label for="title">Promotion</label>
                         <!-- <input type="text" class="form-control" name="product_title"> -->
@@ -163,11 +166,15 @@ if (isset($_POST['add_product'])) {
 
                         </select>
                     </div>
-                    <div class="form-group">
+                   <div class="form-group">
                         <label for="product_price">Promotion Price</label>
                         <input type="number" class="form-control" name="promo_price">
                     </div>
-
+                    <div class="form-group">
+                        <label for="product_price">Promotion Date</label>
+                        <input type="datetime-local" class="form-control" name="promo_date">
+                    </div>
+                    
                     <div class="form-group">
                         <label for="product_info">Product Infos</label>
                         <textarea class="form-control "name="product_info" id="" cols="30" rows="5">

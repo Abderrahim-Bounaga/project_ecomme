@@ -79,6 +79,11 @@
         $row_user = mysqli_fetch_array($run_user);
         
         $user_id = $row_user['id'];
+        $user_name = $row_user['username'];
+        $user_email = $row_user['email'];
+        $user_city = $row_user['city'];
+        $user_adress = $row_user['address'];
+        $user_contact = $row_user['contact'];
         
         $get_orders = "SELECT * FROM customer_orders WHERE customer_id='$user_id'";
         
@@ -98,18 +103,15 @@
 			<div class="row"> 
 				<div class="col-md-8">
 					<h6 class="text-muted">Delivery to</h6>
-					<p>Michael Jackson <br>  
-					Phone +1234567890 Email: myname@gmail.com <br>
-			    	Location: Home number, Building name, Street 123, <br> 
-			    	P.O. Box: 100123
+					<p> <?php echo $user_name; ?><br>  
+					Phone: <?php echo $user_contact; ?>, Email: <?php echo $user_email; ?> <br>
+			    	Location: <?php echo $user_adress; ?> <br> 
+			    	<?php echo $user_city; ?>
 			 		</p>
 				</div>
 				<div class="col-md-4">
 					<h6 class="text-muted">Payment</h6>
-					<span class="text-success">
-						<i class="fab fa-lg fa-cc-visa"></i>
-					    Visa  **** 4216  
-					</span>
+					
 					<p>Subtotal: $356 <br>
 					 Shipping fee:  $56 <br> 
 					 <span class="b">Total:  $456 </span>

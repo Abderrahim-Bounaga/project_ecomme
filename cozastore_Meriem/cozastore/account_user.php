@@ -67,14 +67,29 @@
 	<main class="col-md-9">
 
 		<article class="card mb-3">
+
+			<?php 
+			$user_session = $_SESSION['username'];
+				
+			$get_user = "SELECT * FROM user WHERE username='$user_session'";
+			
+			$run_user = mysqli_query($db,$get_user);
+			
+			$row_user = mysqli_fetch_array($run_user);
+			
+			$user_id = $row_user['id'];
+			$user_city = $row_user['city'];
+			$user_adress = $row_user['address'];
+			
+			?>
 			<div class="card-body">
 			        <?php include "profil_user.php"?>
 					<hr>
 					<p>
 						<i class="fa fa-map-marker text-muted"></i> &nbsp; My address:  
 						<br>
-						Tashkent city, Street name, Building 123, House 321 &nbsp 
-						<a href="#" class="btn-link"> Edit</a>
+						 <?php echo $user_city; ?>, <?php echo $user_adress; ?>
+						<a href="edit_account.php" class="btn-link"> Edit</a>
 					</p>
 			  
 				
@@ -113,38 +128,60 @@
 		<article class="card  mb-3">
 			<div class="card-body">
 				<h5 class="card-title mb-4">Recent orders </h5>	
-
+				
 				<div class="row">
 				<div class="col-md-6">
+				<?php 
+						$user_session = $_SESSION['username'];
+							
+						$get_user = "SELECT * FROM user WHERE username='$user_session'";
+						
+						$run_user = mysqli_query($db,$get_user);
+						
+						$row_user = mysqli_fetch_array($run_user);
+						
+						$user_id = $row_user['id'];
+						$get_orders = "SELECT * FROM customer_orders WHERE customer_id='$user_id'";
+				
+						$run_orders = mysqli_query($db,$get_orders);
+						$i = 0;
+					
+						while($row_orders = mysqli_fetch_array($run_orders)){
+							
+							$order_id = $row_orders['order_id'];
+							$due_amount = $row_orders['due_amount'];
+							$image_pro = $row_orders['image_pro'];
+							$title_pro = $row_orders['title_pro'];
+							$qty = $row_orders['qty'];
+							$size = $row_orders['size'];
+							$color = $row_orders['color'];
+							$order_status = $row_orders['order_status'];
+							
+							$i++;
+							
+							if($order_status=='pending'){
+								
+								$order_status = 'Unpaid';
+								
+							}else{
+								
+								$order_status = 'Paid';
+								
+							}
+						?>
 					<figure class="itemside  mb-3">
-						<div class="aside"><img src="images/denim_kadin_ceket_126554.jpg" class="border img-sm" width="30%" height="10%" ></div>
+					
+						<div class="aside"><img src="images/<?php echo $image_pro; ?>" class="border img-sm" width="30%" height="10%" ></div>
 						<figcaption class="info">
 							<time class="text-muted"><i class="fa fa-calendar-alt"></i> 12.09.2019</time>
-							<p>Great book name goes here </p>
+							<p><?php echo $title_pro; ?> </p>
 							<span class="text-success">Order confirmed </span>
 						</figcaption>
+						
 					</figure>
+					<?php } ?>
 				</div> <!-- col.// -->
-				<div class="col-md-6">
-					<figure class="itemside  mb-3">
-						<div class="aside"><img src="images/erkek_ceket_106980.jpg" class="border img-sm" width="30%" height="10%"></div>
-						<figcaption class="info">
-							<time class="text-muted"><i class="fa fa-calendar-alt"></i> 12.09.2019</time>
-							<p>How to be rich</p>
-							<span class="text-success">Departured</span>
-						</figcaption>
-					</figure>
-				</div> <!-- col.// -->
-				<div class="col-md-6">
-					<figure class="itemside mb-3">
-						<div class="aside"><img src="images/bej_erkek_pantolon_84671.jpg" class="border img-sm" width="30%" height="10%"></div>
-						<figcaption class="info">
-							<time class="text-muted"><i class="fa fa-calendar-alt"></i> 12.09.2019</time>
-							<p>Harry Potter book </p>
-							<span class="text-success">Shipped  </span>
-						</figcaption>
-					</figure>
-				</div> <!-- col.// -->
+				
 			</div> <!-- row.// -->
 
 			<a href="#" class="btn btn-outline-primary btn-block"> See all orders <i class="fa fa-chevron-down"></i>  </a>

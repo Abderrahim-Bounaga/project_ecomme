@@ -76,7 +76,14 @@
             $order_id = $_GET['order_id'];
             
         }
-          
+			
+			$get_order = "SELECT * FROM customer_orders WHERE order_id='$order_id'";
+			$run_order = mysqli_query($db,$get_order);
+
+			$row_order = mysqli_fetch_array($run_order);
+			$order_id = $row_order['order_id'];
+			$due_amount = $row_order['due_amount'];
+			$invoice_no = $row_order['invoice_no'];
           ?>
         <div class="card">
             <div class="card-body">
@@ -87,11 +94,11 @@
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>Invoice NO </label>
-                                <input type="text" class="form-control" value="123456789" name="invoice_no">
+                                <input type="text" class="form-control" value="<?php echo $invoice_no; ?>" name="invoice_no">
                             </div> <!-- form-group end.// -->
                             <div class="col form-group">
                                 <label>Amount Sent</label>
-                                <input type="text" class="form-control" value="" name="amount_sent">
+                                <input type="text" class="form-control" value="<?php echo $due_amount; ?>" name="amount_sent">
                             </div> <!-- form-group end.// -->
                         </div> <!-- form-row.// -->
                         
@@ -101,8 +108,8 @@
                             <select id="inputState" class="form-control" name="payment_mode">
                                 <option> Choose...</option>
                                 <option>Back Code</option>
-                                <option>UBL / Omni Paisa</option>
-                                <option selected="">Easy Paisa</option>
+                                <option>paypall / Payo</option>
+                                <option selected="">wafa cash</option>
                                 <option>Western Union</option>
                             </select>
                             </div> <!-- form-group end.// -->
@@ -119,7 +126,7 @@
                             </div> <!-- form-group end.// -->
                             <div class="form-group col-md-6">
                             <label>Payment Date</label>
-                            <input type="text" class="form-control" value="+2126456789" name="date">
+                            <input type="date" class="form-control" value="" name="date">
                             </div> <!-- form-group end.// -->
                         </div> <!-- form-row.// -->
                         <br>

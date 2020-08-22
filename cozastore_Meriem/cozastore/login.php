@@ -63,7 +63,7 @@ if (isset($_POST['login_user'])) {
         $_SESSION['id'] = $user_id;
         $_SESSION['username'] = $username;
         echo " <script>alert('Welcome $username')</script>";
-        echo " <script>window.open('payment_options.php','_self')</script>";
+        echo " <script>window.open('account_user.php','_self')</script>";
     }
     
 
